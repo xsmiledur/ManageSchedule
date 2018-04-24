@@ -1,0 +1,175 @@
+body {
+    font-family: '07LogoTypeGothic7';
+    font-size: 18px;
+}
+.title-background {
+    width: 100%;
+    height: 1000px;
+    background: url("../img/title-back2.jpg");
+    background-size: cover;
+}
+.title-text {
+    padding: 150px 0px 10px;
+    font-size: 80px;
+    color: #5b310f;
+    text-shadow:
+            0 0 25px #edf8ff,
+            0 0 20px #edf8ff,
+            0 0 0.4px #edf8ff;
+}
+
+.subtitle-text {
+    padding: 10px 0px 30px;
+    font-size: 24px;
+    color: #5b310f;
+    text-shadow:
+            0 0 25px #edf8ff,
+            0 0 20px #edf8ff,
+            0 0 0.4px #edf8ff;
+}
+
+@font-face{font-family:"IonIcons";src:url("//code.ionicframework.com/ionicons/2.0.1/fonts/ionicons.eot?v=2.0.1");src:url("//code.ionicframework.com/ionicons/2.0.1/fonts/ionicons.eot?v=2.0.1#iefix") format("embedded-opentype"),url("//code.ionicframework.com/ionicons/2.0.1/fonts/ionicons.ttf?v=2.0.1") format("truetype"),url("//code.ionicframework.com/ionicons/2.0.1/fonts/ionicons.woff?v=2.0.1") format("woff"),url("//code.ionicframework.com/ionicons/2.0.1/fonts/ionicons.svg?v=2.0.1#Ionicons") format("svg");font-weight:normal;font-style:normal}
+
+.pt20{
+    padding-top: 20px;
+}
+.inverse{
+    background: #fff;
+    padding: 20px 0;
+    color: #fff;
+}
+.select-wrap {
+    position: relative;
+    width: 80px;
+    margin: 10px 0px 0px;
+}
+.select-wrap:before {
+    z-index: 1;
+    position: absolute;
+    right: 15px;
+    top: 0;
+    content: "\f123";
+    font-family: "IonIcons";
+    line-height: 43px;
+    color: #7F878C;
+    pointer-events: none;
+}
+select{
+    outline:none;
+    -moz-appearance: none;
+    text-indent: 0.01px;
+    text-overflow: '';
+    background: #eee;
+    vertical-align: middle;
+    font-size: inherit;
+    color: inherit;
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    height: 40px;
+    padding: 8px 12px;
+    border:1px solid #ddd;
+    color:#828c9a;
+    width: 100%;
+    border-radius:3px;
+}
+select option{
+    background-color: #fff;
+    color: #333;
+}
+select::-ms-expand {
+    display: none;
+}
+select:-moz-focusring {
+    color: transparent;
+    text-shadow: 0 0 0 #828c9a;
+}
+.select-wrap.select-primary:before{
+    color:#fff;
+}
+.select-wrap.select-primary > select{
+    background:#0084B4;
+    color:#fff;
+    border-color:#0084B4;
+}
+.select-wrap.select-primary > select:-moz-focusring {
+    color: transparent;
+    text-shadow: 0 0 0 #fff;
+}
+
+.select-wrap.select-inverse:before{
+    color:#fff;
+}
+.select-wrap.select-inverse > select{
+    color:#fff;
+    border-color: #fff;
+}
+
+.select-wrap.select-inverse > select:-moz-focusring {
+    color: transparent;
+    text-shadow: 0 0 0 #fff;
+}
+
+input{
+    outline:none;
+    -moz-appearance: none;
+    text-indent: 0.01px;
+    text-overflow: '';
+    background: #eee;
+    vertical-align: middle;
+    font-size: inherit;
+    color: inherit;
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    height: 40px;
+    padding: 8px 12px;
+    border:1px solid #ddd;
+    color:#828c9a;
+    width: 100%;
+    border-radius:3px;
+}
+
+.input-wrap {
+    width: 240px;
+    margin: 5px 0px;
+}
+
+#mem-name-box {
+    margin: 10px 0px;
+}
+
+
+button {
+    outline:none;
+    -moz-appearance: none;
+    text-indent: 0.01px;
+    text-overflow: '';
+    background: #eee;
+    vertical-align: middle;
+    font-size: inherit;
+    color: inherit;
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    height: 40px;
+    padding: 8px 12px;
+    border:1px solid #ddd;
+    color:#828c9a;
+    width: 100%;
+    border-radius:3px;
+}
+
+.button-wrap {
+    width: 100px;
+    margin: 5px 0px;
+}
