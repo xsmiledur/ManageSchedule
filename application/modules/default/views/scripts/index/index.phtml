@@ -1,18 +1,85 @@
 <!DOCTYPE html>
 <html>
-
 <head>
+    <title>Manage Schedule</title>
+    <meta charset='utf-8' />
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="description" content='計数工学科アルゴリズム班によって制作されたアプリケーション、"MaySearch"が、あなたの五月祭ライフをより楽しく快適にします'>
-    <meta name="title" content="Yuri Mikawa">
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
 
-    <title>立替さん</title>
+    <style type="text/css">
+        h3{
+            color: #fff;
+            padding:10px;
+            /*width: 300px;*/
+            background:#333;
+        }
+        h3 i{
+            text-align: right;
+            cursor:pointer;
+        }
+        h3 span{
+            /*display:block;*/
+            /*background:url(開く時の画像) no-repeat right 50%;*/
+        }
+        h3.bg02 span{
+            /*background:url(閉じる時の画像) no-repeat right 50%;*/
+        }
+        div{
+            padding:20px;
+            /*display:none;*/
+        }
 
-    <link href="/plugin/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/plugin/pe-icon-7-stroke/css/pe-icon-7-stroke.css" rel="stylesheet">
-    <link href="/common/css/common.css" rel="stylesheet">
+        input[type=checkbox] {
+            display: none;
+        }
+        .check_css {
+            -webkit-transition: background-color 0.2s linear;
+            transition: background-color 0.2s linear;
+            position: relative;
+            display: inline-block;
+            padding: 0 0 0 42px;
+            vertical-align: middle;
+            cursor: pointer;
+        }
+        .check_css:hover:after {
+            border-color: #0171bd;
+        }
+        .check_css:after {
+            -webkit-transition: border-color 0.2s linear;
+            transition: border-color 0.2s linear;
+            position: absolute;
+            top: 50%;
+            left: 15px;
+            display: block;
+            margin-top: -10px;
+            width: 16px;
+            height: 16px;
+            border: 2px solid #ccc;
+            border-radius: 6px;
+            content: '';
+        }
+        .check_css:before {
+            -webkit-transition: opacity 0.2s linear;
+            transition: opacity 0.2s linear;
+            position: absolute;
+            top: 50%;
+            left: 21px;
+            display: block;
+            margin-top: -7px;
+            width: 5px;
+            height: 9px;
+            border-right: 3px solid #0171bd;
+            border-bottom: 3px solid #0171bd;
+            content: '';
+            opacity: 0;
+            -webkit-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            transform: rotate(45deg);
+        }
+        input[type=checkbox]:checked + .check_css:before {
+            opacity: 1;
+        }
+    </style>
 
 </head>
 <body>
@@ -27,9 +94,46 @@
                     <div class="col-lg-8 col-lg-offset-2 ">
                         <div class="row">
                             <div class="col-lg-12">
-                                <p class="title-text">立替さん</p>
-                                <p class="subtitle-text">友達と立替料金が管理できるアプリです</p>
+                                <p class="title-text">ManageSchedule</p>
+                                <p>出欠登録画面</p>
+                                <!--<p class="subtitle-text">友達と立替料金が管理できるアプリです</p>-->
                             </div>
+
+                            <div style="width: 300px;">
+                                <h3>
+                                    <span>カレンダー一覧</span>
+                                    <i class="accordion fa fa-angle-down"></i>
+                                </h3>
+                                <div id="content" style="text-align: left;">
+                                    <!--                                <p class="calendar-checkbox">-->
+                                    <!--                                    <input type="checkbox" name="任意" value="ホームページ" id="hp" checked="checked"/>-->
+                                    <!--                                    <label for="hp" class="check_css"></label>-->
+                                    <!--                                </p>-->
+                                </div>
+                            </div>
+
+                            <div style="width: 500px; text-align: left;">
+                                <pre>
+<!--                                --><?php //var_dump($this->startTime); ?>
+<!--                                --><?php //var_dump($this->endTime); ?>
+                                    </pre>
+                                <?php $num = 0; foreach($this->date as $item): ?>
+                                        <p class="dateselect">
+                                            <?php echo $item[0]."〜".substr($item[1], 11, 5); ?>
+                                            <input id="date<?php echo $num; ?>-0" name="<?php echo $num; ?>" value="0" type="radio" checked="checkedS">○
+                                            <input id="date<?php echo $num; ?>-1" name="<?php echo $num; ?>" value="1" type="radio">△
+                                            <input id="date<?php echo $num; ?>-2" name="<?php echo $num; ?>" value="2" type="radio">×
+                                            <?php ++$num; ?>
+                                        </p>
+                                <?php endforeach; ?>
+                            </div>
+
+                            <div id="results"></div>
+
+                            <!--Add buttons to initiate auth sequence and sign out-->
+                            <button id="authorize-button" style="display: none;">Authorize</button>
+                            <button id="signout-button" style="display: none;">Sign Out</button>
+
 
                             <div class="col-lg-12">
                                 人数を決めましょう<br>
@@ -67,394 +171,301 @@
         </div>
 
     </div>
+    <?php echo $this->startTime["year"].", ".$this->startTime["month"].", ".$this->startTime["day"]; ?>
+    <?php echo $this->endTime["year"].", ".$this->endTime["month"].", ".$this->endTime["day"]; ?>
+
 </div>
 
-<!-- Mainly scripts -->
-<script src="/plugin/js/jquery-3.1.1.min.js"></script>
-<script src="/plugin/js/bootstrap.min.js"></script>
-<script src="/plugin/js/plugins/metisMenu/jquery.metisMenu.js"></script>
-<script src="/plugin/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
-<!-- Custom and plugin javascript -->
-<script src="/plugin/js/inspinia.js"></script>
-<script src="/plugin/js/plugins/pace/pace.min.js"></script>
+<script type="text/javascript">
+    // Client ID and API key from the Developer Console
+    var CLIENT_ID = '672296088832-v7ghkmcg9umbvq618gll8qifdlf33noo.apps.googleusercontent.com';
+    var API_KEY = 'AIzaSyCzMMER7O3G_Jd9WZJ47jKrUQD2z20L2HE';
 
-<!-- Steps -->
-<script src="/plugin/js/plugins/steps/jquery.steps.min.js"></script>
+    // Array of API discovery doc URLs for APIs used by the quickstart
+    var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"];
 
-<script>
+    // Authorization scopes required by the API; multiple scopes can be
+    // included, separated by spaces.
+    var SCOPES = "https://www.googleapis.com/auth/calendar.readonly";
 
-//    str.replace(/[A-Za-z0-9]/g, function(s) {
-//        return String.fromCharCode(s.charCodeAt(0) + 65248);
-//    });
+    var authorizeButton = document.getElementById('authorize-button');
+    var signoutButton = document.getElementById('signout-button');
 
-    function toFullWidth(value) {
-        return value.replace(/./g, (s) => {
-                return String.fromCharCode(s.charCodeAt(0) + 0xFEE0);
-    });
+    /**
+     *  On load, called to load the auth2 library and API client library.
+     */
+    function handleClientLoad() {
+        MakeMSecList();
+        gapi.load('client:auth2', initClient);
     }
 
-    $('#mem-num').change(function() {
-        var num = parseInt($(this).val());
-        $("#num").val(num);
-        console.log(num);
-        $("#mem-name-box").html("");
-        for (var i=1; i<=num; i++) {
-            var inputbox = $("#mem-name").clone();
-            $(inputbox).removeAttr("id");
-            $(inputbox).removeAttr("style");
-            $(inputbox).find("input").attr("name", "mem-name" + i);
-            $(inputbox).find("input").attr("placeholder", toFullWidth(String(i)) + "人目の名前を記入");
-            $(inputbox).appendTo("#mem-name-box");
-        }
-
-    });
-
-
-    /* twitterシェア*/
-    window.twttr=(function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],t=window.twttr||{};if(d.getElementById(id))return;js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);t._e=[];t.ready=function(f){t._e.push(f);};return t;}(document,"script","twitter-wjs"));
-
-    $(document).ready(function() {
-        $("#form").steps({
-            bodyTag: "fieldset",
-            labels: {
-                finish: "探索開始",
-                next: "次へ",
-                previous: "戻る"
-            },
-            enableAllSteps: true,
-            onStepChanging: function (event, currentIndex, newIndex) {
-                // スムーススクロール
-                $('body,html').animate({scrollTop: $('#all-cover').offset().top}, 400, 'swing');
-
-                //if (currentIndex > newIndex) return true;
-
-                if (newIndex == 1 && currentIndex < newIndex) {
-                    var res = NoStep1($('input[name="clock1"]').val(), $('input[name="clock2"]').val());
-                    if (!res) return false;
-                    TimePost1($('input[name="date"]:checked').val());
-                }
-
-                if (newIndex == 2 && currentIndex < newIndex) {
-                    //時間が更新されたので、予め確認画面の企画を全て消去
-                    $('.last-conf').remove();
-                    var start_pos = $('input[name="start-pos"]').val();
-                    res = NoStep2(start_pos);
-                    if (!res) return false;
-                    TimePost2($('input[name="date"]:checked').val(), $('input[name="clock1"]').val(), $('input[name="clock2"]').val());
-                }
-
-                if (newIndex - currentIndex > 1) return false;
-
-                var form = $(this);
-
-                if (currentIndex < newIndex) {
-                    // To remove error styles
-                    $(".body:eq(" + newIndex + ") label.error", form).remove();
-                    $(".body:eq(" + newIndex + ") .error", form).removeClass("error");
-                }
-                return true;
-
-            },
-            onFinishing: function (event, currentIndex) {
-                var search = FinishCheck();
-                if (search.length == 0) {
-                    ErrorMsg("企画が選択されてません", "検索するには、企画を１つ以上選択してください");
-
-                } else if (search.length > 20) {
-
-                    ErrorMsg("企画の数が多すぎます", "検索するには、企画は20個以下にしてください");
-                } else {
-                    var time = FinishTimeCheck(search);
-                    $('#page-wrapper').addClass('sk-loading');
-                    var ajaxpost = FinishPost(search, time, $('input[name="start-pos"]').val(), $('input[name="date"]:checked').val(), $('input[name="clock1"]').val(), $('input[name="clock2"]').val());
-                    $('#search-stop').click(function () {
-                        $('#page-wrapper').removeClass('sk-loading');
-                        ajaxpost.abort();
-                        return false;
-                    });
-                    return true;
-                }
+    var dDate;
+    // PHPから得られた時刻表を全てミリセックに直す
+    function MakeMSecList()
+    {
+        var _dDate = JSON.parse('<?php echo $this->dDate; ?>');
+        dDate = new Array(_dDate.length);
+        for (var i=0; i<_dDate.length; i++) {
+            var _j = new Array(_dDate[i].length + 1);
+            for (var j=0; j<_dDate[i].length; j++) {
+                _j[j] = Date.parse(_dDate[i][j]);
             }
-        });
-    });
-</script>
-
-<!-- Clock picker -->
-<script src="/plugin/js/plugins/clockpicker/clockpicker.js"></script>
-
-<!-- Select2 -->
-<!--<script src="/plugin/js/plugins/select2/select2.full.min.js"></script>-->
-
-<!--select2 その２-->
-<!--<script src="/js/select2/select2.full.min.js"></script>-->
-
-<!-- Sweet alert -->
-<script src="/plugin/js/plugins/sweetalert/sweetalert.min.js"></script>
-
-<script>
-//    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-//            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-//        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-//    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-//    ga('create', 'UA-99122786-1', 'auto');
-//    ga('send', 'pageview');
-
-    $(document).ready(function() {
-        $('head link:last').after('<link rel="stylesheet" href="/plugin/css/plugins/clockpicker/clockpicker.css">');
-        RemoveClock(navigator.userAgent);
-        //SetNow();
-
-        /*日付変更関連*/
-        $('input[name="date"]').change(function() {ChangeDate()});
-
-        $('input[name="no-time"]').change(function() {NoTimeCheck()});
-
-        $('input[name="clock1"]').change(function() {TimeChange(1, $(this).val())});
-        $('input[name="clock2"]').change(function() {TimeChange(2, $(this).val())});
-        //select2
-        var style = '<link rel="stylesheet" href="/plugin/css/plugins/select2/select2.min.css">';
-        $('head link:last').after(style);
-        //SweerAlert
-        style = '<link rel="stylesheet" href="/plugin/css/plugins/sweetalert/sweetalert.css">';
-        $('head link:last').after(style);
-        $('#toppage-may').hover(function() {
-            $('#toppage-comment').fadeIn('fast');
-        }, function() {
-            $('#toppage-comment').fadeOut('fast');
-
-        });
-
-    });
-
-    function RemoveClock(agent) {
-        if (agent.search(/iPhone/) != -1 || agent.search(/iPod/) != -1 || agent.search(/Android/) != -1) { //スマートフォン
-            $('#clock-check').remove();
-        } else { //PC,タブレット
-            $('#time-check').remove();
-            //clockpicker
-            $('#clock1').clockpicker({
-                placement: 'bottom',
-                align: 'left',
-                autoclose: true,
-                'default': '現在時刻'
-            });
-            $('#clock2').clockpicker({
-                placement: 'bottom',
-                align: 'left',
-                autoclose: true,
-            });
+            _j[_dDate[i].length] = 0;
+            dDate[i] = _j;
         }
+//        console.log(dDate);
     }
-    function SetNow() {
-        var now = new Date();
-        var val;
-        var h = now.getHours();
-        if(h < 9 || h >= 18){//9時前あるいは18時以降
-            val = "09:00";
+
+    /**
+     *  Initializes the API client library and sets up sign-in state
+     *  listeners.
+     */
+    function initClient() {
+        gapi.client.init({
+            apiKey: API_KEY,
+            clientId: CLIENT_ID,
+            discoveryDocs: DISCOVERY_DOCS,
+            scope: SCOPES
+        }).then(function () {
+            // Listen for sign-in state changes.
+            gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
+
+            // Handle the initial sign-in state.
+            updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+            authorizeButton.onclick = handleAuthClick;
+            signoutButton.onclick = handleSignoutClick;
+        });
+    }
+
+    /**
+     *  Called when the signed in status changes, to update the UI
+     *  appropriately. After a sign-in, the API is called.
+     */
+    function updateSigninStatus(isSignedIn) {
+        if (isSignedIn) {
+            authorizeButton.style.display = 'none';
+            signoutButton.style.display = 'block';
+            listUpcomingEvents();
         } else {
-            var m = now.getMinutes();
-            h = String(h); m = String(m);
-            if (h.length == 1) h = "0" + h;
-            if (m.length == 1) m = "0" + m;
-            val = h + ":" + m;
-        }
-        $('#clockText1').text(val);
-        $('input[name="clock1"]').attr("value", val).attr('placeholder', val);
-    }
-    function ChangeDate() {
-        if ($('input#1day').is(':checked')) $("#jQueryTime").text('１日目（２０日）');
-        else $("#jQueryTime").text('２日目（２１日）');
-    }
-    function NoTimeCheck() {
-        if ($('input[name="no-time"]').is(':checked')) $('#input-clock2').val("18:00").prop("disabled", true);
-        else $('#input-clock2').prop("disabled", false);
-    }
-    function TimeChange(num, time) {
-        if (!time) {
-            $('#clock-check').addClass('has-error');
-            $('#clock-check-help').show();
-            return false;
-        }
-        var time_ = $('input[name="clock' + String(3 - parseInt(num)) + '"]').val();
-
-        var arr = new Array();
-        var h, m;
-        var flg = 1;
-        h = time.substr(0, 2); m = time.substr(3, 2);
-        if ($.isNumeric(h) && $.isNumeric(m)) {
-            arr[parseInt(num) - 1] = parseInt(h * 60) + parseInt(m);
-        } else flg = 0;
-        h = time_.substr(0, 2); m = time_.substr(3, 2);
-        if ($.isNumeric(h) && $.isNumeric(m)) {
-            arr[2 - parseInt(num)] = parseInt(h * 60) + parseInt(m);
-        } else flg = 0;
-        if ((parseInt(arr[0]) >= parseInt(arr[1]) || parseInt(arr[0]) >= 1080 || parseInt(arr[0]) < 540 || parseInt(arr[1]) <= 540 || parseInt(arr[1]) > 1080)
-        && flg == 1) {
-            $('#clock-check').addClass('has-error');
-            $('#clock-check-help').show();
-        } else {
-            $('#clockText' + num).text(time);
-            $('#clock-check').removeClass('has-error');
-            $('#clock-check-help').hide();
+            authorizeButton.style.display = 'block';
+            signoutButton.style.display = 'none';
         }
     }
 
-    function TimePost1(date) {
-        $.ajax({
-            url: "/search/time-post1",
-            type: "POST",
-            data: {
-                date : date
-            },
-            success: function(arr) {
-                $.ajax({
-                    type: 'GET',
-                    url: '/search/refresh01',
-                    dataType: 'html',
-                    success: function(data) {
-                        $('#sample02').empty();
-                        $('#sample02').append(data);
-                        //window.scrollTo(0,document.body.scrollHeight);
+    /**
+     *  Sign in the user upon button click.
+     */
+    function handleAuthClick(event) {
+        gapi.auth2.getAuthInstance().signIn();
+    }
 
-                    },
-                    error:function() {
-                        alert('問題がありました。');
+    /**
+     *  Sign out the user upon button click.
+     */
+    function handleSignoutClick(event) {
+        gapi.auth2.getAuthInstance().signOut();
+    }
+
+    /**
+     * Append a pre element to the body containing the given message
+     * as its text node. Used to display the results of the API call.
+     *
+     * @param {string} message Text to be placed in pre element.
+     */
+    function appendPre(message) {
+        $("#results").append(message + '<br>')
+    }
+
+    function appendCalendarList(title, cal_id) {
+        $("#content").append('<p class="calendar-checkbox"><input type="checkbox" name="任意" value="ホームページ" id="cal-' + cal_id + '" checked="checked"/> <label for="cal-' + cal_id + '" class="check_css">' + title + '</label></p>');
+
+    }
+
+    /**
+     * Print the summary and start datetime/date of the next ten events in
+     * the authorized user's calendar. If no events are found an
+     * appropriate message is printed.
+     */
+//    var allEvents = new Array();
+//
+//    function checkAllEvents()
+//    {
+//        for (var i = 0; i < dDate.length; i++) {
+//            var dStart = dDate[i][0];
+//            var dEnd = dDate[i][1];
+//            console.log(dStart + "  " + dEnd);
+//
+//            var bool = CheckAttendance(dStart, dEnd);
+//            console.log(bool);
+//            ChangeAttendance(bool, i);
+//
+//
+//        }
+//    }
+
+    function listUpcomingEvents() {
+
+        gapi.client.calendar.calendarList.list({
+            'maxResults': 100,
+            'showHidden': true
+        }).then(function(responce) {
+            var calendarIds = responce.result.items;
+            // monthは0を起点とする
+            console.log(new Date(<?php echo $this->startTime["year"].", ".($this->startTime["month"] -1) .", ".($this->startTime["day"]); ?>));
+            console.log(new Date(<?php echo $this->endTime["year"].", ".($this->endTime["month"] -1).", ".($this->endTime["day"]+1); ?>));
+            for (var j=0; j<calendarIds.length; j++) {
+                var cal = calendarIds[j];
+                appendCalendarList(calendarIds[j].summary, j);
+//                console.log((new Date()).toISOString());
+                gapi.client.calendar.events.list({
+                    'calendarId': calendarIds[j].id,
+                    'timeMin': (new Date(<?php echo $this->startTime["year"].", ".($this->startTime["month"] -1) .", ".($this->startTime["day"]); ?>)).toISOString(),
+                    'timeMax': (new Date(<?php echo $this->endTime["year"].", ".($this->endTime["month"] -1).", ".($this->endTime["day"]+1); ?>)).toISOString(),
+                    'showDeleted': false,
+                    'singleEvents': true,
+                    'maxResults': 100,
+                    'orderBy': 'startTime'
+                }).then(function (response) {
+                    var events = response.result.items;
+//                    allEvents.push(events);
+//                    CheckAttendance(events, )
+
+                    for (var i = 0; i < dDate.length; i++) {
+                        var dStart = dDate[i][0];
+                        var dEnd = dDate[i][1];
+                        var nowBool = dDate[i][2];
+//                        console.log(dStart + "  " + dEnd);
+
+//                        console.log("number:" + i);
+                        var bool = CheckAttendance(events, dStart, dEnd, nowBool);
+                        dDate[i][2] = bool;
+//                        console.log(bool);
+                        ChangeAttendance(bool, i);
+
+
                     }
-                });
-            },
-            error:function(arr) {
-                alert('問題がありました。');
-            }
-        });
-    }
 
-    function TimePost2(date, clock1, clock2) {
-        $('#sample01').addClass('sk-loading');
+//                    console.log(events.length);
 
-        $.ajax({
-            url: "/search/time-post2",
-            type: "POST",
-            data: {
-                date  : date,
-                clock1 : clock1,
-                clock2 : clock2
-            },
-            success: function(arr) {
-                $.ajax({
-                    type: 'GET',
-                    url: '/search/refresh02',
-                    dataType: 'html',
-                    success: function(data) {
-                        $('#sample01').empty();
-                        $('#sample01').append(data);
 
-                    },
-                    error:function() {
-                        alert('問題がありました。');
-                        $('#sample01').removeClass('sk-loading');
-                    },
-                    complete:function() {
-                        $('#sample01').removeClass('sk-loading');
-                    }
                 });
 
-            },
-            error:function(arr) {
-                alert('問題がありました。');
+
             }
+
+//            checkAllEvents();
+
         });
+
+//        if (events.length > 0) {
+//            for (var i = 0; i < events.length; i++) {
+//                var event = events[i];
+//                var bool = CheckAttendance(Date.parse(event.start.dateTime), Date.parse(event.end.dateTime), Date.parse(event.start.date));
+//                ChangeAttendance(bool, i);
+//
+//                var start = event.start.dateTime;
+//                var end = event.end.dateTime;
+//                if (!start) {
+//                    start = event.start.date;
+//
+//                }
+//                else {
+//
+//                }
+//                appendPre(event.summary + ' (' + start + ' - ' + end + ')')
+//            }
+//        } else {
+//            appendPre('No upcoming events found.');
+//        }
+//        appendPre('<br>');
 
     }
 
-    function FinishPost(search, time, start_pos, date, clock1, clock2) {
-        var ajaxpost = $.ajax({
-            url: "/search/search",
-            type: "POST",
-            data: {
-                search : search,
-                time   : time,
-                start_pos : start_pos,
-                date   : date,
-                clock1 : clock1,
-                clock2 : clock2
-            },
-            success: function(arr) {
-                //console.log(arr);
-                if (arr == 0 || arr == -1 || arr == -2) {
-                    $('#page-wrapper').removeClass('sk-loading');
-                    swal({
-                        title: "あなたが選択した条件では最適経路が見つかりませんでした",
-                        text: "お手数ですが、条件を変更して再度検索してください",
-                        type: "warning",
-                        confirmButtonColor: "#DD6B55",
-                        confirmButtonText: "OK",
-                        closeOnConfirm: false
-                    });
-                    return false;
-                }
-                window.location.href = "/result";
+    function CheckAttendance(events, dStart, dEnd, nowBool)
+    {
+//        日程開始時間 dStart, dEnd
+//        元々の用事 jStart, jEnd
+//
+//        if (jStart <= dStart && jEnd >= dEnd) false;
+//        if (jEnd <= dStart) false;
+//        if (jStart >= dEnd) false;
+//
+//        if (jStart > dStart) {
+//            if ((dEnd - jStart) / (dEnd - dStart) > 0.5) false;
+//            else nan;
+//        }
+//        if (jEnd < dEnd) {
+//            if ((jEnd - dStart) / (dEnd - dStart) > 0.5) false;
+//            else nan;
+//        }
+//
+//        return true;
+        var flg2 = false;
+//        console.log(events.length);
 
+        if (nowBool == 2) return 2;
 
-            },
-            error:function() {
-                alert('問題がありました。');
+        for (var i=0; i<events.length; i++) {
+            var jStart = Date.parse(events[i].start.dateTime);
+            var jEnd = Date.parse(events[i].end.dateTime);
+//            console.log(events[i].start.dateTime);
+            if (!events[i].start.dateTime) {
+                console.log(events[i].summary);
+                var start = events[i].start.date;
+                jStart = Date.parse(new Date(start.slice(0,4), parseInt(start.slice(5,7))-1, start.slice(8,10)));
+                jEnd = jStart + 24 * 60 * 60 * 1000;
+
+//                console.log(jStart + " " + jEnd + " : " + new Date(jStart) + " " + new Date(jEnd));
+//                console.log(start + "      " + new Date(jEnd) + "       " + jStart + " " + jEnd);
+//                console.log(dStart + " " + dEnd + " : " + new Date(dStart) + " " + new Date(dEnd)) ;
+//                console.log("-------");
+
             }
-        });
-        return ajaxpost;
+
+
+            if (jStart <= dStart && jEnd >= dEnd) {return 2;}
+            if (jEnd <= dStart) continue;
+            if (jStart >= dEnd) continue;
+
+            if (jStart > dStart && jStart < dEnd) {
+                if ((dEnd - jStart) / (dEnd - dStart) > 0.5) {return 2;}
+                else {flg2 = true;}
+            }
+            if (jEnd < dEnd && jEnd > dStart) {
+//                console.log(i + " " + (jEnd - dStart) / (dEnd - dStart) + " ");
+                if ((jEnd - dStart) / (dEnd - dStart) > 0.5) {return 2;}
+                else {flg2 = true;}
+            }
+
+        }
+
+        if (flg2 || nowBool == 1) return 1;
+        else return 0;
     }
 
-    function NoStep1(clock1, clock2) {
-        var c = parseInt(clock1.substr(0,2)*60) + parseInt(clock1.substr(3,2));
-        var d = parseInt(clock2.substr(0,2)*60 )+ parseInt(clock2.substr(3,2));
-        if (parseInt(c) >= parseInt(d) || parseInt(c) >= 1080 || parseInt(c) < 540 || parseInt(d) <= 540 || parseInt(d) > 1080) {
-            return false;
-        } else {
-            return true;
-        }
+    function ChangeAttendance(bool, i)
+    {
+        if (bool == 0) return;
+        $("#date" + i + "-" + bool).prop("checked", true);
     }
-    function NoStep2(start_pos) {
-        if (!start_pos) {
-            $('#select-start-pos-error').removeClass('text-muted').addClass('text-danger').addClass('phone-display');
-            return false;
-        } else {
-            //$('#select-start-pos-error').hide();
-            return true;
-        }
-    }
-    function FinishCheck() {
-        var j = 0;
-        var search = new Array();
-        $('input[name="select-p"]:checked').map(function() {
-            search[j] = $(this).val();
-            j++;
-        });
-        return search;
-    }
-    function FinishTimeCheck(search) {
-        var i;
-        var N = search.length;
-        var time = new Array();
-        for (i=0; i<N; i++) {
-            time[i] = $('select[name="time' + search[i] + '"]').val();
-        }
-        return time;
 
-    }
-    function ErrorMsg(title, text) {
-        swal({
-            title: title,
-            text: text,
-            type: "warning",
-            confirmButtonColor: "#DD6B55",
-            confirmButtonText: "OK",
-            closeOnConfirm: false
+
+    /** Appearance */
+    $(function(){
+
+
+        $(".accordion").click(function(){
+            $(this).parent().toggleClass("bg02").next().slideToggle();
         });
-    }
+    });
+
 </script>
 
+<script async defer src="https://apis.google.com/js/api.js"
+        onload="this.onload=function(){};handleClientLoad()"
+        onreadystatechange="if (this.readyState === 'complete') this.onload()">
+</script>
 </body>
-
 </html>
-

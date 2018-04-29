@@ -74,21 +74,130 @@ class IndexController extends Zend_Controller_Action
 
     }
 
+
+    /**
+     * Returns an authorized API client.
+     * @return Google_Client the authorized client object
+     */
+    private function getClient()
+    {
+        $client = new Google_Client();
+        $client->setApplicationName('Google Calendar API PHP Quickstart');
+        $client->setScopes(Google_Service_Calendar::CALENDAR_READONLY);
+        $client->setAuthConfig('client_secret.json');
+        $client->setAccessType('offline');
+
+        // Load previously authorized credentials from a file.
+        $credentialsPath = expandHomeDirectory('credentials.json');
+        if (file_exists($credentialsPath)) {
+            $accessToken = json_decode(file_get_contents($credentialsPath), true);
+        } else {
+            // Request authorization from the user.
+            $authUrl = $client->createAuthUrl();
+            printf("Open the following link in your browser:\n%s\n", $authUrl);
+            print 'Enter verification code: ';
+            $authCode = trim(fgets(STDIN));
+
+            // Exchange authorization code for an access token.
+            $accessToken = $client->fetchAccessTokenWithAuthCode($authCode);
+
+            // Store the credentials to disk.
+            if (!file_exists(dirname($credentialsPath))) {
+                mkdir(dirname($credentialsPath), 0700, true);
+            }
+            file_put_contents($credentialsPath, json_encode($accessToken));
+            printf("Credentials saved to %s\n", $credentialsPath);
+        }
+        $client->setAccessToken($accessToken);
+
+        // Refresh the token if it's expired.
+        if ($client->isAccessTokenExpired()) {
+            $client->fetchAccessTokenWithRefreshToken($client->getRefreshToken());
+            file_put_contents($credentialsPath, json_encode($client->getAccessToken()));
+        }
+        return $client;
+    }
+
+    /**
+     * Expands the home directory alias '~' to the full path.
+     * @param string $path the path to expand.
+     * @return string the expanded path.
+     */
+    private function expandHomeDirectory($path)
+    {
+        $homeDirectory = getenv('HOME');
+        if (empty($homeDirectory)) {
+            $homeDirectory = getenv('HOMEDRIVE') . getenv('HOMEPATH');
+        }
+        return str_replace('~', realpath($homeDirectory), $path);
+    }
+
     public function indexAction()
     {
+        $starttime = array("13:00", "15:00", "17:00");
+        $endtime = array("15:00", "17:00", "19:00");
+        $date = array();
+        for ($i=7; $i<15; $i++) {
+            for ($j=0; $j<count($starttime); $j++) {
+                $_date = array();
+                $t =  new DateTime("2018-5-".(string)$i." ".$starttime[$j]);
+                array_push($_date, $t->format('Y-m-d H:i'));
+                $t =  new DateTime("2018-5-".(string)$i." ".$endtime[$j]);
+                array_push($_date, $t->format('Y-m-d H:i'));
+                array_push($date, $_date);
+            }
+        }
+//        echo "<pre>";
+//        var_dump($date);
+//        echo "</pre>";
+        $this->view->date = $date;
+        $this->view->dDate = json_encode($date);
+
+        $this->view->startTime = array(
+            "year" => substr($date[0][0], 0, 4),
+            "month" => substr($date[0][0], 5, 2),
+            "day" => substr($date[0][0], 8, 2),
+        );
+        $num = count($date[count($date)-1])-1;
+
+        $this->view->endTime = array(
+            "year" => substr($date[count($date)-1][$num], 0, 4),
+            "month" => substr($date[count($date)-1][$num], 5, 2),
+            "day" => substr($date[count($date)-1][$num], 8, 2),
+        );
+//        var_dump($this->view->endTime);
 
 
-//        $request = $this->getRequest();
-//        //$search = $request->getParam('search');
-//        $this->view->data_all   = $this->_main->getProjectData();
-
-
-/*
-        $text = "工学博覧会2017";
-        $encoded = rawurlencode( $text ) ;
-        echo $encoded;
-*/
+// Get the API client and construct the service object.
+//        $client = $this->getClient();
+//        $service = new Google_Service_Calendar($client);
+//
+//// Print the next 10 events on the user's calendar.
+//        $calendarId = 'primary';
+//        $optParams = array(
+//            'maxResults' => 10,
+//            'orderBy' => 'startTime',
+//            'singleEvents' => true,
+//            'timeMin' => date('c'),
+//        );
+//        $results = $service->events->listEvents($calendarId, $optParams);
+//
+//        if (empty($results->getItems())) {
+//            print "No upcoming events found.\n";
+//        } else {
+//            print "Upcoming events:\n";
+//            foreach ($results->getItems() as $event) {
+//                $start = $event->start->dateTime;
+//                if (empty($start)) {
+//                    $start = $event->start->date;
+//                }
+//                printf("%s (%s)\n", $event->getSummary(), $start);
+//            }
+//        }
 
     }
+
+
+
 
 }
