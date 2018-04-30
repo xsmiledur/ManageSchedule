@@ -1,0 +1,51 @@
+@charset "UTF-8";
+
+body{
+  background: #EBDBC2;
+}
+
+#container{
+  position: relative;
+  height: auto;
+}
+
+header{
+  text-align: center;
+  background-color: white;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.content{
+  max-width: 60%;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 20px;
+  background-color: white;
+
+}
+
+h1{
+  font-size: 150%;
+
+}
+
+li{
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.red{
+  color: red;
+}
+
+footer{
+  bottom: 0;
+  width: 100%;
+  background-color: #D2D1CD;
+  color: gray;
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
