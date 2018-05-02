@@ -125,6 +125,9 @@ class UserController extends Zend_Controller_Action
 
     }
 
+    public function testAction()
+    {}
+
     public function authAction()
     {
 //        var_dump("ccc");
