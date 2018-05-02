@@ -20,6 +20,7 @@ class MainModel
      */
     public function __construct($db_read, $db_write)
     {
+        // var_dump("aaa");
         // 接続情報を取得する
         if (!isset($db_read) || count($db_read) < 1 || !isset($db_write) || count($db_write) < 1) {
             throw new Zend_Exception(__FILE__ . '(' . __LINE__ . '): ' . 'データベース接続情報が取得できませんでした。');
@@ -42,10 +43,15 @@ class MainModel
 
         // データベースアダプタを作成する
         $this->_read = Zend_Db::factory($db_read['type'], $read_params);
+        // var_dump("aaa");
         // 文字コードをUTF-8に設定する
+        echo "<pre>";
+        // var_dump($this->_read);
+        echo "</pre>";
 //        $this->_read->query("set names 'utf8'");
         // データ取得形式を設定する
         $this->_read->setFetchMode(Zend_Db::FETCH_ASSOC);
+        // var_dump("aaa");
 
         // データベースの接続パラメータを定義する
         $write_params = array(
@@ -64,7 +70,28 @@ class MainModel
 
         // データ取得形式を設定する
         $this->_write->setFetchMode(Zend_Db::FETCH_ASSOC);
+        // var_dump("aaa");
 
+    }
+
+
+    public function userAuth($email, $password)
+    {
+        // var_dump("ddd");
+        $select = $this->_read->select();
+        $select->from('user_data');
+//        $select->where('uid = ?', 1);
+        $select->where('u_active_flg = ?', 1);
+        $select->where('u_email = ?', $email);
+        $stmt = $select->query();
+        $user = $stmt->fetch();
+//        if (password_verify($password, $user["u_password"]))
+        if ($password == $user["u_password"])
+            return $user["uid"];
+        else return false;
+//        echo "<pre>";
+//        // var_dump($select);
+//        echo "</pre>";
     }
 
     public function getGroupData($id)
@@ -141,7 +168,7 @@ class MainModel
             // 失敗した場合はロールバックしてエラーメッセージを返す
             $this->_read->rollBack();
             $this->_read->query('rollback');
-            //var_dump($e->getMessage());exit();
+            //// var_dump($e->getMessage());exit();
             return false;
         }
 
@@ -177,7 +204,7 @@ class MainModel
             // 失敗した場合はロールバックしてエラーメッセージを返す
             $this->_read->rollBack();
             $this->_read->query('rollback');
-            var_dump($e->getMessage());exit();
+            // var_dump($e->getMessage());exit();
             return false;
         }
 
@@ -244,7 +271,7 @@ class MainModel
                     // 失敗した場合はロールバックしてエラーメッセージを返す
                     $this->_read->rollBack();
                     $this->_read->query('rollback');
-                    var_dump($e->getMessage());exit();
+                    // var_dump($e->getMessage());exit();
                     return false;
                 }
 
@@ -320,7 +347,7 @@ class MainModel
                     // 失敗した場合はロールバックしてエラーメッセージを返す
                     $this->_read->rollBack();
                     $this->_read->query('rollback');
-                    //var_dump($e->getMessage());exit();
+                    //// var_dump($e->getMessage());exit();
                     return false;
                 }
 
@@ -356,7 +383,7 @@ class MainModel
             // 失敗した場合はロールバックしてエラーメッセージを返す
             $this->_read->rollBack();
             $this->_read->query('rollback');
-            //var_dump($e->getMessage());exit();
+            //// var_dump($e->getMessage());exit();
             return false;
         }
 
@@ -386,7 +413,7 @@ class MainModel
             // 失敗した場合はロールバックしてエラーメッセージを返す
             $this->_read->rollBack();
             $this->_read->query('rollback');
-            //var_dump($e->getMessage());exit();
+            //// var_dump($e->getMessage());exit();
             return false;
         }
 
@@ -416,7 +443,7 @@ class MainModel
             // 失敗した場合はロールバックしてエラーメッセージを返す
             $this->_read->rollBack();
             $this->_read->query('rollback');
-            var_dump($e->getMessage());exit();
+            // var_dump($e->getMessage());exit();
             return false;
         }
 
@@ -446,7 +473,7 @@ class MainModel
             // 失敗した場合はロールバックしてエラーメッセージを返す
             $this->_read->rollBack();
             $this->_read->query('rollback');
-            var_dump($e->getMessage());exit();
+            // var_dump($e->getMessage());exit();
             return false;
         }
 
@@ -548,7 +575,7 @@ class MainModel
             // 失敗した場合はロールバックしてエラーメッセージを返す
             $this->_read->rollBack();
             $this->_read->query('rollback');
-//            var_dump($e->getMessage());exit();
+//            // var_dump($e->getMessage());exit();
             return false;
         }
     }
@@ -577,7 +604,7 @@ class MainModel
             // 失敗した場合はロールバックしてエラーメッセージを返す
             $this->_read->rollBack();
             $this->_read->query('rollback');
-//            var_dump($e->getMessage());exit();
+//            // var_dump($e->getMessage());exit();
             return false;
         }
     }
@@ -622,7 +649,7 @@ class MainModel
             // 失敗した場合はロールバックしてエラーメッセージを返す
             $this->_read->rollBack();
             $this->_read->query('rollback');
-//            var_dump($e->getMessage());exit();
+//            // var_dump($e->getMessage());exit();
             return false;
         }
     }
@@ -673,7 +700,7 @@ class MainModel
             // 失敗した場合はロールバックしてエラーメッセージを返す
             $this->_read->rollBack();
             $this->_read->query('rollback');
-//            var_dump($e->getMessage());exit();
+//            // var_dump($e->getMessage());exit();
             return false;
         }
 
@@ -729,7 +756,7 @@ class MainModel
             // 失敗した場合はロールバックしてエラーメッセージを返す
             $this->_read->rollBack();
             $this->_read->query('rollback');
-            var_dump($e->getMessage());exit();
+            // var_dump($e->getMessage());exit();
             return false;
         }
     }
@@ -755,7 +782,7 @@ class MainModel
              // 失敗した場合はロールバックしてエラーメッセージを返す
              $this->_read->rollBack();
              $this->_read->query('rollback');
-             var_dump($e->getMessage());exit();
+             // var_dump($e->getMessage());exit();
              return false;
          }
 
@@ -815,11 +842,11 @@ class MainModel
                      if ($rec[$val]) $insert[$val] = 1;
                  }
              } else {
-                 var_dump("ERROR おすすめフラグ等がない");
+                 // var_dump("ERROR おすすめフラグ等がない");
              }
 
              echo "<pre>";
-             var_dump($insert);
+             // var_dump($insert);
              echo "</pre>";
 
 
@@ -838,7 +865,7 @@ class MainModel
                  // 失敗した場合はロールバックしてエラーメッセージを返す
                  $this->_write->rollBack();
                  $this->_write->query('rollback');
-                 var_dump($e->getMessage());
+                 // var_dump($e->getMessage());
                  exit();
                  return false;
              }
@@ -867,7 +894,7 @@ class MainModel
              // 失敗した場合はロールバックしてエラーメッセージを返す
              $this->_read->rollBack();
              $this->_read->query('rollback');
-             var_dump($e->getMessage());exit();
+             // var_dump($e->getMessage());exit();
              return false;
          }
 
@@ -908,11 +935,11 @@ class MainModel
                      if ($bld) {
                          $insert = array_merge($insert, $bld);
                      } else {
-                         var_dump("建物データがありません");
+                         // var_dump("建物データがありません");
                      }
                      */
                      echo "<pre>";
-                     var_dump($insert);
+                     // var_dump($insert);
                      echo "</pre>";
 
 
@@ -932,7 +959,7 @@ class MainModel
                          // 失敗した場合はロールバックしてエラーメッセージを返す
                          $this->_write->rollBack();
                          $this->_write->query('rollback');
-                         var_dump($e->getMessage());
+                         // var_dump($e->getMessage());
                          exit();
                          return false;
                      }
@@ -961,7 +988,7 @@ class MainModel
              // 失敗した場合はロールバックしてエラーメッセージを返す
              $this->_read->rollBack();
              $this->_read->query('rollback');
-             var_dump($e->getMessage());
+             // var_dump($e->getMessage());
              exit();
              return false;
          }
@@ -980,11 +1007,11 @@ class MainModel
              $stmt = $select->query();
              $time = $stmt->fetch();
              if ($time) $insert['pt_time'] = $time['滞在時間目安'];
-             else var_dump("ERROR 滞在時間目安がありません");
+             else // var_dump("ERROR 滞在時間目安がありません");
 
              if ($item['pp_full']) {
                  echo "<pre>";
-                 var_dump($insert);
+                 // var_dump($insert);
                  echo "</pre>";
 
                  $this->_write->beginTransaction();
@@ -1001,7 +1028,7 @@ class MainModel
                      // 失敗した場合はロールバックしてエラーメッセージを返す
                      $this->_write->rollBack();
                      $this->_write->query('rollback');
-                     var_dump($e->getMessage());
+                     // var_dump($e->getMessage());
                      exit();
                      return false;
                  }
@@ -1025,7 +1052,7 @@ class MainModel
                          }
                      }
                      echo "<pre>";
-                     var_dump($insert);
+                     // var_dump($insert);
                      echo "</pre>";
 
                      $this->_write->beginTransaction();
@@ -1042,7 +1069,7 @@ class MainModel
                          // 失敗した場合はロールバックしてエラーメッセージを返す
                          $this->_write->rollBack();
                          $this->_write->query('rollback');
-                         var_dump($e->getMessage());
+                         // var_dump($e->getMessage());
                          exit();
                          return false;
                      }
@@ -1069,7 +1096,7 @@ class MainModel
              // 失敗した場合はロールバックしてエラーメッセージを返す
              $this->_read->rollBack();
              $this->_read->query('rollback');
-             var_dump($e->getMessage());exit();
+             // var_dump($e->getMessage());exit();
              //return false;
          }
 
@@ -1079,7 +1106,7 @@ class MainModel
                  $where = '';
                  $where[] = "pd_pid = '{$item['pd_pid']}'";
 
-                 var_dump($item['pd_pid']);
+                 // var_dump($item['pd_pid']);
 
                  $this->_write->beginTransaction();
                  $this->_write->query('begin');
@@ -1096,7 +1123,7 @@ class MainModel
                      // 失敗した場合はロールバックしてエラーメッセージを返す
                      $this->_write->rollBack();
                      $this->_write->query('rollback');
-                     var_dump($e->getMessage());
+                     // var_dump($e->getMessage());
                      exit();
                      return false;
                  }
@@ -1120,7 +1147,7 @@ class MainModel
              // 失敗した場合はロールバックしてエラーメッセージを返す
              $this->_read->rollBack();
              $this->_read->query('rollback');
-             var_dump($e->getMessage());exit();
+             // var_dump($e->getMessage());exit();
              return false;
          }
 
@@ -1146,7 +1173,7 @@ class MainModel
                      // 失敗した場合はロールバックしてエラーメッセージを返す
                      $this->_write->rollBack();
                      $this->_write->query('rollback');
-                     var_dump($e->getMessage());
+                     // var_dump($e->getMessage());
                      exit();
                      return false;
                  }
@@ -1171,7 +1198,7 @@ class MainModel
              // 失敗した場合はロールバックしてエラーメッセージを返す
              $this->_read->rollBack();
              $this->_read->query('rollback');
-             var_dump($e->getMessage());exit();
+             // var_dump($e->getMessage());exit();
              return false;
          }
 
@@ -1190,7 +1217,7 @@ class MainModel
              $where[] = "pt_pid = '{$item['pt_pid']}'";
 
              echo "<pre>";
-             var_dump($update);
+             // var_dump($update);
              echo "</pre>";
              if (count($update) > 0) {
 
@@ -1209,7 +1236,7 @@ class MainModel
                      // 失敗した場合はロールバックしてエラーメッセージを返す
                      $this->_write->rollBack();
                      $this->_write->query('rollback');
-                     var_dump($e->getMessage());
+                     // var_dump($e->getMessage());
                      exit();
                      return false;
                  }
@@ -1240,8 +1267,8 @@ class MainModel
 
 
                  echo "<pre>";
-                 var_dump($place);
-                 var_dump($update);
+                 // var_dump($place);
+                 // var_dump($update);
                  echo "</pre>";
 
 
@@ -1263,7 +1290,7 @@ class MainModel
                      // 失敗した場合はロールバックしてエラーメッセージを返す
                      $this->_write->rollBack();
                      $this->_write->query('rollback');
-                     var_dump($e->getMessage());
+                     // var_dump($e->getMessage());
                      exit();
                      return false;
                  }
@@ -1297,7 +1324,7 @@ class MainModel
             // 失敗した場合はロールバックしてエラーメッセージを返す
             $this->_read->rollBack();
             $this->_read->query('rollback');
-            var_dump($e->getMessage());exit();
+            // var_dump($e->getMessage());exit();
             return false;
         }
 
@@ -1327,7 +1354,7 @@ class MainModel
                 // 失敗した場合はロールバックしてエラーメッセージを返す
                 $this->_write->rollBack();
                 $this->_write->query('rollback');
-                var_dump($e->getMessage());
+                // var_dump($e->getMessage());
                 exit();
                 return false;
             }
@@ -1350,7 +1377,7 @@ class MainModel
             // 失敗した場合はロールバックしてエラーメッセージを返す
             $this->_read->rollBack();
             $this->_read->query('rollback');
-            var_dump($e->getMessage());exit();
+            // var_dump($e->getMessage());exit();
             return false;
         }
 
@@ -1367,7 +1394,7 @@ class MainModel
             if (strlen($update['bd_pid']) > 0 && strlen($update['bd_top2']) > 0 && strlen($update['bd_left2']) > 0) {
 
                 echo "<pre>";
-                var_dump($update);
+                // var_dump($update);
                 echo "</pre>";
                 $this->_write->beginTransaction();
                 $this->_write->query('begin');
@@ -1390,7 +1417,7 @@ class MainModel
                     // 失敗した場合はロールバックしてエラーメッセージを返す
                     $this->_write->rollBack();
                     $this->_write->query('rollback');
-                    var_dump($e->getMessage());
+                    // var_dump($e->getMessage());
                     exit();
                     return false;
                 }
@@ -1418,7 +1445,7 @@ class MainModel
             // 失敗した場合はロールバックしてエラーメッセージを返す
             $this->_read->rollBack();
             $this->_read->query('rollback');
-            var_dump($e->getMessage());exit();
+            // var_dump($e->getMessage());exit();
             return false;
         }
 
@@ -1428,8 +1455,8 @@ class MainModel
             $where[] = "pp_pid = '{$item['pp_pid']}'";
 
             echo "<pre>";
-            var_dump($item);
-            var_dump($update);
+            // var_dump($item);
+            // var_dump($update);
             echo "</pre>";
 
 
@@ -1450,7 +1477,7 @@ class MainModel
                 // 失敗した場合はロールバックしてエラーメッセージを返す
                 $this->_write->rollBack();
                 $this->_write->query('rollback');
-                var_dump($e->getMessage());
+                // var_dump($e->getMessage());
                 exit();
                 return false;
             }
@@ -1482,7 +1509,7 @@ class MainModel
                 // 失敗した場合はロールバックしてエラーメッセージを返す
                 $this->_read->rollBack();
                 $this->_read->query('rollback');
-                var_dump($e->getMessage());
+                // var_dump($e->getMessage());
                 exit();
                 return false;
             }
@@ -1491,7 +1518,7 @@ class MainModel
                     unset($item2[$key . '_pid']);
                 }
                 echo "<pre>";
-                var_dump($item2);
+                // var_dump($item2);
                 echo "</pre>";
 
 
@@ -1510,7 +1537,7 @@ class MainModel
                     // 失敗した場合はロールバックしてエラーメッセージを返す
                     $this->_write->rollBack();
                     $this->_write->query('rollback');
-                    var_dump($e->getMessage());
+                    // var_dump($e->getMessage());
                     exit();
                     return false;
                 }
@@ -1539,7 +1566,7 @@ class MainModel
             // 失敗した場合はロールバックしてエラーメッセージを返す
             $this->_read->rollBack();
             $this->_read->query('rollback');
-            var_dump($e->getMessage());
+            // var_dump($e->getMessage());
             exit();
             return false;
         }
@@ -1549,8 +1576,8 @@ class MainModel
             $where[] = "pt_pid = '{$item['pt_pid']}'";
 
             echo "<pre>";
-            var_dump($item);
-            var_dump($update);
+            // var_dump($item);
+            // var_dump($update);
             echo "</pre>";
 
 
@@ -1570,7 +1597,7 @@ class MainModel
                 // 失敗した場合はロールバックしてエラーメッセージを返す
                 $this->_write->rollBack();
                 $this->_write->query('rollback');
-                var_dump($e->getMessage());
+                // var_dump($e->getMessage());
                 exit();
                 return false;
             }
@@ -1596,7 +1623,7 @@ class MainModel
             // 失敗した場合はロールバックしてエラーメッセージを返す
             $this->_read->rollBack();
             $this->_read->query('rollback');
-            var_dump($e->getMessage());
+            // var_dump($e->getMessage());
             //exit();
             return false;
         }
@@ -1633,11 +1660,11 @@ class MainModel
                     $where = '';
                     $where[] = "pt_pid = '{$item['pt_pid']}'";
 
-                    var_dump(count($place_));
+                    // var_dump(count($place_));
                     echo "<pre>";
-                    var_dump($truep);
-                    var_dump($update);
-                    var_dump($where);
+                    // var_dump($truep);
+                    // var_dump($update);
+                    // var_dump($where);
                     echo "</pre>";
 
 
@@ -1656,7 +1683,7 @@ class MainModel
                         // 失敗した場合はロールバックしてエラーメッセージを返す
                         $this->_write->rollBack();
                         $this->_write->query('rollback');
-                        var_dump($e->getMessage());
+                        // var_dump($e->getMessage());
                         exit();
                         return false;
                     }
@@ -1685,7 +1712,7 @@ class MainModel
             // 失敗した場合はロールバックしてエラーメッセージを返す
             $this->_read->rollBack();
             $this->_read->query('rollback');
-            var_dump($e->getMessage());
+            // var_dump($e->getMessage());
             //exit();
             return false;
         }
@@ -1695,7 +1722,7 @@ class MainModel
             $update['pd_label_kana'] = mb_convert_kana($item['pd_label'],'ca');
             $update['pd_body_kana']  = mb_convert_kana($item['pd_body'],'ca');
             echo "<pre>";
-            var_dump($update);
+            // var_dump($update);
             echo "</pre>";
 
             $where = '';
@@ -1715,7 +1742,7 @@ class MainModel
                 // 失敗した場合はロールバックしてエラーメッセージを返す
                 $this->_write->rollBack();
                 $this->_write->query('rollback');
-                var_dump($e->getMessage());
+                // var_dump($e->getMessage());
                 exit();
                 return false;
             }
@@ -1738,7 +1765,7 @@ class MainModel
             // 失敗した場合はロールバックしてエラーメッセージを返す
             $this->_read->rollBack();
             $this->_read->query('rollback');
-            var_dump($e->getMessage());
+            // var_dump($e->getMessage());
             //exit();
             return false;
         }
@@ -1748,7 +1775,7 @@ class MainModel
             $update['pp_place_num'] = mb_convert_kana($item['pp_place'],'ca');
 
             echo "<pre>";
-            var_dump($update);
+            // var_dump($update);
             echo "</pre>";
 
 
@@ -1769,7 +1796,7 @@ class MainModel
                 // 失敗した場合はロールバックしてエラーメッセージを返す
                 $this->_write->rollBack();
                 $this->_write->query('rollback');
-                var_dump($e->getMessage());
+                // var_dump($e->getMessage());
                 exit();
                 return false;
             }

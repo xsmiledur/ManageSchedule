@@ -8,13 +8,15 @@ require_once 'Zend/Session.php';
 
 require_once '../application/modules/default/models/MainModel.php';
 
-class IndexController extends Zend_Controller_Action
+class UserController extends Zend_Controller_Action
 {
     private $_config;                         // 設定情報
     private $_session;                        // セッションのインスタンス
     private $_lang;                           // 言語設定
     private $_contents;                       // 言語データ
     private $_main;                           // モデルのインスタンス
+    public $view;
+    public $_helper;
 
     public function init()
     {
@@ -31,6 +33,7 @@ class IndexController extends Zend_Controller_Action
         /**
          * DBの接続
          */
+//        var_dump("bbb");
 
         $db_rand = rand(1,2);
         if ($db_rand == 2) {
@@ -40,6 +43,7 @@ class IndexController extends Zend_Controller_Action
         }
 
         $db_write = $this->_config->datasource->database->toArray();
+//        var_dump("bbb");
 
         // モデルのインスタンスを生成する
         $this->_main = new MainModel($db_read,$db_write);
@@ -55,6 +59,7 @@ class IndexController extends Zend_Controller_Action
             $this->_session->lang = 'ja';
         }
         $this->_lang = $this->_session->lang;
+//        var_dump("bbb");
 
         /**
          * Viewに必要データを渡す
@@ -71,6 +76,7 @@ class IndexController extends Zend_Controller_Action
         $this->view->lang       = $this->_session->lang;
 
         //$this->_helper->layout->setLayout('index');
+//        var_dump("bbb");
 
     }
 
@@ -110,36 +116,38 @@ class IndexController extends Zend_Controller_Action
             "month" => substr($date[count($date)-1][$num], 5, 2),
             "day" => substr($date[count($date)-1][$num], 8, 2),
         );
-//        var_dump($this->view->endTime);
 
 
-// Get the API client and construct the service object.
-//        $client = $this->getClient();
-//        $service = new Google_Service_Calendar($client);
-//
-//// Print the next 10 events on the user's calendar.
-//        $calendarId = 'primary';
-//        $optParams = array(
-//            'maxResults' => 10,
-//            'orderBy' => 'startTime',
-//            'singleEvents' => true,
-//            'timeMin' => date('c'),
-//        );
-//        $results = $service->events->listEvents($calendarId, $optParams);
-//
-//        if (empty($results->getItems())) {
-//            print "No upcoming events found.\n";
-//        } else {
-//            print "Upcoming events:\n";
-//            foreach ($results->getItems() as $event) {
-//                $start = $event->start->dateTime;
-//                if (empty($start)) {
-//                    $start = $event->start->date;
-//                }
-//                printf("%s (%s)\n", $event->getSummary(), $start);
-//            }
-//        }
+    }
 
+    public function loginAction()
+    {
+
+    }
+
+    public function authAction()
+    {
+//        var_dump("ccc");
+
+        $this->_helper->viewRenderer->setNoRender(true);
+
+//        var_dump("ccc");
+
+        $request = $this->getRequest();
+        $name = $request->getPost("name");
+        $pass = $request->getPost("pass");
+//        $pass = password_hash($request->getPost("pass"), PASSWORD_DEFAULT);
+        var_dump($name);
+        var_dump($pass);
+//        var_dump("ccc");
+
+        $uid = $this->_main->userAuth($name, $pass);
+        if (!$uid) {
+            $this->_session->errMsg = "email or パスワードが正しくありません";
+            $this->_redirect("/user/login");
+        }
+        else {
+        }
     }
 
 

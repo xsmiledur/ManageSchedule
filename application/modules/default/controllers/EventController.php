@@ -8,7 +8,7 @@ require_once 'Zend/Session.php';
 
 require_once '../application/modules/default/models/MainModel.php';
 
-class IndexController extends Zend_Controller_Action
+class EventController extends Zend_Controller_Action
 {
     private $_config;                         // 設定情報
     private $_session;                        // セッションのインスタンス
@@ -73,9 +73,6 @@ class IndexController extends Zend_Controller_Action
         //$this->_helper->layout->setLayout('index');
 
     }
-
-
-
 
     public function indexAction()
     {

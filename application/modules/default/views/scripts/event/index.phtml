@@ -6,6 +6,8 @@
 
     <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
 
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/ui-lightness/jquery-ui.css" >
+
     <style type="text/css">
         h3{
             color: #fff;
@@ -93,11 +95,45 @@
                 <div align="center" class="title-background" >
                     <div class="col-lg-8 col-lg-offset-2 ">
                         <div class="row">
-                            <a href="event">event 新規作成</a>
                             <div class="col-lg-12">
                                 <p class="title-text">ManageSchedule</p>
-                                <p>出欠登録画面</p>
+                                <p>イベント作成画面</p>
                                 <!--<p class="subtitle-text">友達と立替料金が管理できるアプリです</p>-->
+                            </div>
+
+                            <div class="col-lg-12">
+                                <div class="row">
+                                    <div class="col-xs-4">
+                                        イベント名
+                                    </div>
+                                    <div class="col-xs-8" style="text-align: left;">
+aaa
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-4">
+                                    </div>
+                                    <div class="col-xs-8" style="text-align: left;">
+                                        <input type="text" id="datepicker">
+
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-4" style="text-align: right;">
+
+                                    </div>
+                                    <div class="col-xs-8" style="text-align: left;">
+
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-4" style="text-align: right;">
+
+                                    </div>
+                                    <div class="col-xs-8" style="text-align: left;">
+
+                                    </div>
+                                </div>
                             </div>
 
                             <div style="width: 300px;">
@@ -116,16 +152,16 @@
                             <div style="width: 500px; text-align: left;">
                                 <pre>
 <!--                                --><?php //var_dump($this->startTime); ?>
-<!--                                --><?php //var_dump($this->endTime); ?>
+                                    <!--                                --><?php //var_dump($this->endTime); ?>
                                     </pre>
                                 <?php $num = 0; foreach($this->date as $item): ?>
-                                        <p class="dateselect">
-                                            <?php echo $item[0]."〜".substr($item[1], 11, 5); ?>
-                                            <input id="date<?php echo $num; ?>-0" name="<?php echo $num; ?>" value="0" type="radio" checked="checkedS">○
-                                            <input id="date<?php echo $num; ?>-1" name="<?php echo $num; ?>" value="1" type="radio">△
-                                            <input id="date<?php echo $num; ?>-2" name="<?php echo $num; ?>" value="2" type="radio">×
-                                            <?php ++$num; ?>
-                                        </p>
+                                    <p class="dateselect">
+                                        <?php echo $item[0]."〜".substr($item[1], 11, 5); ?>
+                                        <input id="date<?php echo $num; ?>-0" name="<?php echo $num; ?>" value="0" type="radio" checked="checkedS">○
+                                        <input id="date<?php echo $num; ?>-1" name="<?php echo $num; ?>" value="1" type="radio">△
+                                        <input id="date<?php echo $num; ?>-2" name="<?php echo $num; ?>" value="2" type="radio">×
+                                        <?php ++$num; ?>
+                                    </p>
                                 <?php endforeach; ?>
                             </div>
 
@@ -135,31 +171,31 @@
                             <button id="authorize-button" style="display: none;">Authorize</button>
                             <button id="signout-button" style="display: none;">Sign Out</button>
 
-<!---->
-<!--                            <div class="col-lg-12">-->
-<!--                                人数を決めましょう<br>-->
-<!--                                <div class="select-wrap">-->
-<!--                                    <select id="mem-num" name="mem-num">-->
-<!--                                        --><?php //for ($i=1; $i<=100; $i++): ?>
-<!--                                            <option value="--><?php //echo $i; ?><!--">--><?php //echo $i; ?><!--</option>-->
-<!--                                        --><?php //endfor; ?>
-<!--                                    </select>-->
-<!--                                </div>-->
-<!--                                <br><br>-->
-<!--                                <form action="detail" method="post">-->
-<!--                                    <input type="hidden" id="num" name="num" value="1">-->
-<!--                                    名前を記入しましょう <br>-->
-<!--                                    <div id="mem-name-box">-->
-<!--                                        <div class="input-wrap">-->
-<!--                                            <input type="text" name="mem-name1" placeholder="１人目の名前を記入">-->
-<!--                                        </div>-->
-<!--                                    </div>-->
-<!--                                    <div id="mem-name" class="input-wrap" style="display: none;">-->
-<!--                                        <input type="text" name="sample" placeholder="１人目の名前を記入">-->
-<!--                                    </div>-->
-<!--                                    <div class="button-wrap"><button type="submit" value="次へ">次へ</button></div>-->
-<!--                                </form>-->
-<!--                            </div>-->
+                            <!---->
+                            <!--                            <div class="col-lg-12">-->
+                            <!--                                人数を決めましょう<br>-->
+                            <!--                                <div class="select-wrap">-->
+                            <!--                                    <select id="mem-num" name="mem-num">-->
+                            <!--                                        --><?php //for ($i=1; $i<=100; $i++): ?>
+                            <!--                                            <option value="--><?php //echo $i; ?><!--">--><?php //echo $i; ?><!--</option>-->
+                            <!--                                        --><?php //endfor; ?>
+                            <!--                                    </select>-->
+                            <!--                                </div>-->
+                            <!--                                <br><br>-->
+                            <!--                                <form action="detail" method="post">-->
+                            <!--                                    <input type="hidden" id="num" name="num" value="1">-->
+                            <!--                                    名前を記入しましょう <br>-->
+                            <!--                                    <div id="mem-name-box">-->
+                            <!--                                        <div class="input-wrap">-->
+                            <!--                                            <input type="text" name="mem-name1" placeholder="１人目の名前を記入">-->
+                            <!--                                        </div>-->
+                            <!--                                    </div>-->
+                            <!--                                    <div id="mem-name" class="input-wrap" style="display: none;">-->
+                            <!--                                        <input type="text" name="sample" placeholder="１人目の名前を記入">-->
+                            <!--                                    </div>-->
+                            <!--                                    <div class="button-wrap"><button type="submit" value="次へ">次へ</button></div>-->
+                            <!--                                </form>-->
+                            <!--                            </div>-->
                         </div>
                     </div>
                 </div>
@@ -179,7 +215,18 @@
 
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
+
 <script type="text/javascript">
+
+    $(function() {
+        $("#datepicker").datepicker();
+        $("#datepicker").datepicker("option", "showOn", 'button');
+        $("#datepicker").datepicker("option", "buttonImageOnly", true);
+        $("#datepicker").datepicker("option", "buttonImage", 'ico_calendar.png');
+    });
+
     // Client ID and API key from the Developer Console
     var CLIENT_ID = '672296088832-v7ghkmcg9umbvq618gll8qifdlf33noo.apps.googleusercontent.com';
     var API_KEY = 'AIzaSyCzMMER7O3G_Jd9WZJ47jKrUQD2z20L2HE';
