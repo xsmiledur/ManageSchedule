@@ -18,11 +18,20 @@ header{
 
 .content{
   max-width: 60%;
-  margin: 10px;
+  /*margin: 10px;*/
+  margin: 10px auto;
+  float: center;
   padding: 10px;
   border-radius: 20px;
   background-color: white;
+}
 
+.option{
+  /*margin-left: 20px;*/
+}
+
+.li_content{
+  /*margin-left: 20px;*/
 }
 
 h1{
