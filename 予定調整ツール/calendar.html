@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<style type="text/css">
+			.month1 .date1,		/* 元日 */
+			.month1 .mon2,		/* 成人の日 */
+			.month2 .date11,	/* 建国記念の日 */
+			.month4 .date29,	/* 昭和の日 */
+			.month5 .date3,		/* 憲法記念日 */
+			.month5 .date4,		/* みどりの日 */
+			.month5 .date5,		/* こども日 */
+			.month7 .mon3,		/* 海の日 */
+			.month9 .mon3,		/* 敬老の日 */
+			.month10 .mon2,		/* 体育の日 */
+			.month11 .date3,	/* 文化の日 */
+			.month11 .date23,	/* 勤労感謝の日 */
+			.month12 .date23,	/* 天皇誕生日 */
+			#d20180321, #d20190321, /* #d20200321, #d20190321, #d20190321, #d20190321, #d20190321, #d20190321, #d20190321, #d20190321, /* 春分の日（年によって異なる 20 – 21日） 毎年の日付を入れておく必要、10年分くらい入れとけばいいか */
+			#d20180923, #d20190923, /* #d20200321, #d20190321, #d20190321, #d20190321, #d20190321, #d20190321, #d20190321, #d20190321, /* 秋分の日（年によって異なる 20 – 24日） 毎年の日付を入れておく必要、10年分くらい入れとけばいいか */
+			.sun1, .sun2, .sun3, .sun4, .sun5,
+			.hurikae {background:#FF99CC;color:#FFFFFF;}
+			.sat1, .sat2, .sat3, .sat4, .sat5 {background:#7BD7F9;color:#FFFFFF;}
+			/*.mon1, .mon2, .mon3, .mon4, .mon5,
+			.tue1, .tue2, .tue3, .tue4, .tue5,
+			.wed1, .wed2, .wed3, .wed4, .wed5,
+			.thu1, .thu2, .thu3, .thu4, .thu5,
+			.fri1, .fri2, .fri3, .fri4, .fri5 {background:#ffffff;}*/
+			
+			th, td {
+				text-align: center;
+				background: #ffffff;
+			}
+
+			.days {
+				border: 10px;
+				border-color: gray;
+			}
+
+			.head {
+				border: 0px;
+			}
+			/* 線の色を変えるのがわからん */
+
+			#calendar-content {
+				text-align: center;
+				background-color: yellow;
+
+			}
+		</style>
+	</head>
+	<body>
+		<div id="calendar-all">
+			<div id="midashi">
+				<script type="text/javascript">
+					var y = new Date().getFullYear();
+					var m = new Date().getMonth()+1; // monthは0起点なので１を足す
+					var m_display = (m<10)?"0"+String(m):m; // 月の0付き表示設定
+
+					var txt = '<p>' + y + '年' + m_display + '月</p>';
+
+					document.write(txt);
+				</script>
+			</div>
+
+			<div id="calendar-content">
+				<script type="text/javascript">
+					// 取得したい年月設定（とりあえずPC時間の今日の年月）
+					var y = new Date().getFullYear();
+					var m = new Date().getMonth()+1; // monthは0起点なので１を足す
+
+					// 初期設定
+					// うるう年チェック
+					var feb_date = (y%4 == 0 && y%100 != 0)?29:28;
+					if(y%400 == 0){feb_date = 29};
+					var month_count = {1:31,2:feb_date,3:31,4:30,5:31,6:30,7:31,8:31,9:30,10:31,11:30,12:31}
+					// 曜日の文字列設定
+					var day_en = {d0:"sun",d1:"mon",d2:"tue",d3:"wed",d4:"thu",d5:"fri",d6:"sat"};
+					// 月の0付き表示設定
+					var m_display = (m<10)?"0"+String(m):m; 
+					// 前の月の最終日は何曜日か
+					var last_day = new Date(y,m-1,month_count[m]).getDay();
+					// その年月の1日は何曜日か、第１週目で１日であることを設定
+					var first_day = new Date(y,m-1,1).getDay(); // new Date の引数のmonthは0起点なので１引く // 2014-02-01などの日付(new Date)の曜日を取得(getDay) // 0が日曜、6が土曜
+					var w = 1;
+					var d = first_day;
+
+					// マークアップ生成
+					// <tr>は横の１行
+					// <th>は見出し行の１セル
+					// <td>は見出しでない行の１セル
+					var txt = "";
+					//txt += '<p>' + y + '年' + m_display + '月</p>';
+					txt += '<table summary="' + y + '年' + m_display + '月のカレンダー" class="calendar month' + m + '">';
+					// 1行目(見出し)
+					txt += '<tr class="head">';
+					txt += '<th>SUN</th>';
+					txt += '<th>MON</th>';
+					txt += '<th>TUE</th>';
+					txt += '<th>WED</th>';
+					txt += '<th>THU</th>';
+					txt += '<th>FRI</th>';
+					txt += '<th>SAT</th>';
+					txt += '</tr>';
+					// 第１週
+					txt += '<tr class="days week1">';
+					for(var j=0; j<first_day; j++){
+						txt += '<td>&nbsp;</td>'; // 1日まで空白を挿入
+					}
+					for(var i=1; i<=month_count[m]; i++){ // １日ずつ挿入
+						if(d != 0 && (first_day + i)%7 == 1){ // 週替わりの操作
+							w++;
+							d = 0;
+							txt += '</tr>'; 
+							txt += '<tr class="days week' + w + '">';
+						}
+						var i_display = (i<10)?"0"+String(i):i; // 10日以前は03日などと0をつけて表示
+
+						day_count = (i%7 == 0)? Math.floor(i/7) : Math.floor(i/7) + 1 ;
+						txt += '<td id="d' + y + m_display + i_display + '" class="' + day_en['d'+d] + day_count + ' date' + i + '">' + i + '</td>'; // 振替どうやって特定するか？
+						// 振替も10年分くらい考えればたかが知れてるので、全日程しらみつぶしにしてもいいかも
+						d++;
+					}
+
+					for(var j=0; j<(6-last_day); j++){
+						txt += '<td>&nbsp;</td>\n';
+					}
+					txt += '</tr>';
+					txt += '</table>';
+
+					// 書き出し
+					document.write(txt);
+				</script>
+			</div>
+		</div>
+	</body>
+</html>

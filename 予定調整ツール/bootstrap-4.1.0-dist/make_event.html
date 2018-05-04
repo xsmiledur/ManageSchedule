@@ -1,547 +1,547 @@
 <!DOCTYPE html>
 <html lang="ja">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>イベント新規作成</title>
-    <!-- BootstrapのCSS読み込み -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <!-- jQuery読み込み -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <!-- BootstrapのJS読み込み -->
-    <script src="js/bootstrap.min.js"></script>
-    <!-- 自作スタイルシートの読み込み -->
-    <link rel="stylesheet" href="test.css">
-  </head>
-  
-  <body>
-    <div id="container">
-      <header><a href="index.html"><img src="logo_kari.png" width=160px height=55px></a></header>
-      <!--  -->
-      <!--  -->
-      <!--  -->
-      <div class="content"> <!-- header と content と footer -->
-        <h1>イベント新規作成</h1>
-        <p><span class="red">* 必須項目</span></p>
-        <!-- -->
-        <!-- -->
-        <!-- -->
-        <!-- 以下フォーム部分 -->
-        <!-- 参考：https://qiita.com/AquaMeria/items/fe3fd9ebeb4c7171da3b -->
-        <!-- -->
-        <div class="form">
-          <form>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>イベント新規作成</title>
+        <!-- BootstrapのCSS読み込み -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <!-- jQuery読み込み -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <!-- BootstrapのJS読み込み -->
+        <script src="js/bootstrap.min.js"></script>
+        <!-- 自作スタイルシートの読み込み -->
+        <link rel="stylesheet" href="test.css">
+    </head>
+    
+    <body>
+        <div id="container">
+            <header><a href="index.html"><img src="logo_kari.png" width=160px height=55px></a></header>
             <!-- -->
             <!-- -->
-            <!-- イベント名入力エリア -->
             <!-- -->
-            <div class="form-group">
-              <label>イベント名<span class="red">*</span></label>
-              <input class="form-control" placeholder="イベント名">
-            </div>
-            <!-- -->
-            <!-- -->
-            <!-- 候補日程入力エリア -->
-            <!-- -->
-            <div class="form-group">
-              <label>候補日程<span class="red">*</span></label>
-              <textarea class="form-control input-sm" rows="6" placeholder="候補日程"></textarea>
-              <!-- -->
-              <!-- -->
-              <!-- 候補日程をまとめて挿入するためのツール群 -->
-              <!-- -->
-              <div class="option">
+            <div class="content"> <!-- header と content と footer -->
+                <h1>イベント新規作成</h1>
+                <p><span class="red">* 必須項目</span></p>
                 <!-- -->
                 <!-- -->
-                <!-- 日程の範囲と時間を指定してまとめて挿入 -->
                 <!-- -->
-                <div id="matomete">
-                  <!-- プルダウンボックス -->
-                  <!-- 参考：http://bootstrap3.cyberlab.info/components/dropdowns.html# -->
-                  <ul>
-                    <li>まとめて挿入</li>
-                    <div class="li_content">
-                      <div class="dropdown">
-                        <ol>
-                          <li>期間を指定</li>
-                            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
-                              --
-                              <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu" role="menu">  <!-- 月選択用 -->
-                              <li role="presentation"><a href="#">1</a></li>
-                              <li role="presentation"><a href="#">2</a></li>
-                              <li role="presentation"><a href="#">3</a></li>
-                              <li role="presentation"><a href="#">4</a></li>
-                              <li role="presentation"><a href="#">5</a></li>
-                              <li role="presentation"><a href="#">6</a></li>
-                              <li role="presentation"><a href="#">7</a></li>
-                              <li role="presentation"><a href="#">8</a></li>
-                              <li role="presentation"><a href="#">9</a></li>
-                              <li role="presentation"><a href="#">10</a></li>
-                              <li role="presentation"><a href="#">11</a></li>
-                              <li role="presentation"><a href="#">12</a></li>
-                            </ul>
-                            月
-                            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
-                              --
-                              <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu" role="menu">  <!-- ひにち選択用 -->
-                              <li role="presentation"><a href="#">1</a></li>
-                              <li role="presentation"><a href="#">2</a></li>
-                              <li role="presentation"><a href="#">3</a></li>
-                              <li role="presentation"><a href="#">4</a></li>
-                              <li role="presentation"><a href="#">5</a></li>
-                              <li role="presentation"><a href="#">6</a></li>
-                              <li role="presentation"><a href="#">7</a></li>
-                              <li role="presentation"><a href="#">8</a></li>
-                              <li role="presentation"><a href="#">9</a></li>
-                              <li role="presentation"><a href="#">10</a></li>
-                              <li role="presentation"><a href="#">11</a></li>
-                              <li role="presentation"><a href="#">12</a></li>
-                            </ul>
-                            日 から　
-                            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
-                              --
-                              <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu" role="menu"> <!-- 月選択用 -->
-                              <li role="presentation"><a href="#">1</a></li>
-                              <li role="presentation"><a href="#">2</a></li>
-                              <li role="presentation"><a href="#">3</a></li>
-                              <li role="presentation"><a href="#">4</a></li>
-                              <li role="presentation"><a href="#">5</a></li>
-                              <li role="presentation"><a href="#">6</a></li>
-                              <li role="presentation"><a href="#">7</a></li>
-                              <li role="presentation"><a href="#">8</a></li>
-                              <li role="presentation"><a href="#">9</a></li>
-                              <li role="presentation"><a href="#">10</a></li>
-                              <li role="presentation"><a href="#">11</a></li>
-                              <li role="presentation"><a href="#">12</a></li>
-                            </ul>
-                            月
-                            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
-                              --
-                              <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu" role="menu"> <!-- ひにち選択用 -->
-                              <li role="presentation"><a href="#">1</a></li>
-                              <li role="presentation"><a href="#">2</a></li>
-                              <li role="presentation"><a href="#">3</a></li>
-                              <li role="presentation"><a href="#">4</a></li>
-                              <li role="presentation"><a href="#">5</a></li>
-                              <li role="presentation"><a href="#">6</a></li>
-                              <li role="presentation"><a href="#">7</a></li>
-                              <li role="presentation"><a href="#">8</a></li>
-                              <li role="presentation"><a href="#">9</a></li>
-                              <li role="presentation"><a href="#">10</a></li>
-                              <li role="presentation"><a href="#">11</a></li>
-                              <li role="presentation"><a href="#">12</a></li>
-                            </ul>
-                            日 まで
-                          <!-- -->
-                          <li>曜日を指定</li>
-                            <div class="checkbox"> <!-- 曜日のチェックボックス -->
-                              <label><input type="checkbox" value="">月</label>
-                              <label><input type="checkbox" value="">火</label>
-                              <label><input type="checkbox" value="">水</label>
-                              <label><input type="checkbox" value="">木</label>
-                              <label><input type="checkbox" value="">金</label>
-                              <label><input type="checkbox" value="">土</label>
-                              <label><input type="checkbox" value="">日　</label>
+                <!-- 以下フォーム部分 -->
+                <!-- 参考：https://qiita.com/AquaMeria/items/fe3fd9ebeb4c7171da3b -->
+                <!-- -->
+                <div class="form">
+                    <form>
+                        <!-- -->
+                        <!-- -->
+                        <!-- イベント名入力エリア -->
+                        <!-- -->
+                        <div class="form-group">
+                            <label>イベント名<span class="red">*</span></label>
+                            <input class="form-control" placeholder="イベント名">
+                        </div>
+                        <!-- -->
+                        <!-- -->
+                        <!-- 候補日程入力エリア -->
+                        <!-- -->
+                        <div class="form-group">
+                            <label>候補日程<span class="red">*</span></label>
+                            <textarea class="form-control input-sm" rows="6" placeholder="候補日程"></textarea>
+                            <!-- -->
+                            <!-- -->
+                            <!-- 候補日程をまとめて挿入するためのツール群 -->
+                            <!-- -->
+                            <div class="option">
+                                <!-- -->
+                                <!-- -->
+                                <!-- 日程の範囲と時間を指定してまとめて挿入 -->
+                                <!-- -->
+                                <div id="matomete">
+                                    <!-- プルダウンボックス -->
+                                    <!-- 参考：http://bootstrap3.cyberlab.info/components/dropdowns.html# -->
+                                    <ul>
+                                        <li>まとめて挿入</li>
+                                        <div class="li_content">
+                                            <div class="dropdown">
+                                                <ol>
+                                                    <li>期間を指定</li>
+                                                        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                                                            --
+                                                            <span class="caret"></span>
+                                                        </button>
+                                                        <ul class="dropdown-menu" role="menu"> <!-- 月選択用 -->
+                                                            <li role="presentation"><a href="#">1</a></li>
+                                                            <li role="presentation"><a href="#">2</a></li>
+                                                            <li role="presentation"><a href="#">3</a></li>
+                                                            <li role="presentation"><a href="#">4</a></li>
+                                                            <li role="presentation"><a href="#">5</a></li>
+                                                            <li role="presentation"><a href="#">6</a></li>
+                                                            <li role="presentation"><a href="#">7</a></li>
+                                                            <li role="presentation"><a href="#">8</a></li>
+                                                            <li role="presentation"><a href="#">9</a></li>
+                                                            <li role="presentation"><a href="#">10</a></li>
+                                                            <li role="presentation"><a href="#">11</a></li>
+                                                            <li role="presentation"><a href="#">12</a></li>
+                                                        </ul>
+                                                        月
+                                                        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                                                            --
+                                                            <span class="caret"></span>
+                                                        </button>
+                                                        <ul class="dropdown-menu" role="menu"> <!-- ひにち選択用 -->
+                                                            <li role="presentation"><a href="#">1</a></li>
+                                                            <li role="presentation"><a href="#">2</a></li>
+                                                            <li role="presentation"><a href="#">3</a></li>
+                                                            <li role="presentation"><a href="#">4</a></li>
+                                                            <li role="presentation"><a href="#">5</a></li>
+                                                            <li role="presentation"><a href="#">6</a></li>
+                                                            <li role="presentation"><a href="#">7</a></li>
+                                                            <li role="presentation"><a href="#">8</a></li>
+                                                            <li role="presentation"><a href="#">9</a></li>
+                                                            <li role="presentation"><a href="#">10</a></li>
+                                                            <li role="presentation"><a href="#">11</a></li>
+                                                            <li role="presentation"><a href="#">12</a></li>
+                                                        </ul>
+                                                        日 から　
+                                                        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                                                            --
+                                                            <span class="caret"></span>
+                                                        </button>
+                                                        <ul class="dropdown-menu" role="menu"> <!-- 月選択用 -->
+                                                            <li role="presentation"><a href="#">1</a></li>
+                                                            <li role="presentation"><a href="#">2</a></li>
+                                                            <li role="presentation"><a href="#">3</a></li>
+                                                            <li role="presentation"><a href="#">4</a></li>
+                                                            <li role="presentation"><a href="#">5</a></li>
+                                                            <li role="presentation"><a href="#">6</a></li>
+                                                            <li role="presentation"><a href="#">7</a></li>
+                                                            <li role="presentation"><a href="#">8</a></li>
+                                                            <li role="presentation"><a href="#">9</a></li>
+                                                            <li role="presentation"><a href="#">10</a></li>
+                                                            <li role="presentation"><a href="#">11</a></li>
+                                                            <li role="presentation"><a href="#">12</a></li>
+                                                        </ul>
+                                                        月
+                                                        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                                                            --
+                                                            <span class="caret"></span>
+                                                        </button>
+                                                        <ul class="dropdown-menu" role="menu"> <!-- ひにち選択用 -->
+                                                            <li role="presentation"><a href="#">1</a></li>
+                                                            <li role="presentation"><a href="#">2</a></li>
+                                                            <li role="presentation"><a href="#">3</a></li>
+                                                            <li role="presentation"><a href="#">4</a></li>
+                                                            <li role="presentation"><a href="#">5</a></li>
+                                                            <li role="presentation"><a href="#">6</a></li>
+                                                            <li role="presentation"><a href="#">7</a></li>
+                                                            <li role="presentation"><a href="#">8</a></li>
+                                                            <li role="presentation"><a href="#">9</a></li>
+                                                            <li role="presentation"><a href="#">10</a></li>
+                                                            <li role="presentation"><a href="#">11</a></li>
+                                                            <li role="presentation"><a href="#">12</a></li>
+                                                        </ul>
+                                                        日 まで
+                                                    <!-- -->
+                                                    <li>曜日を指定</li>
+                                                        <div class="checkbox"> <!-- 曜日のチェックボックス -->
+                                                            <label><input type="checkbox" value="">月</label>
+                                                            <label><input type="checkbox" value="">火</label>
+                                                            <label><input type="checkbox" value="">水</label>
+                                                            <label><input type="checkbox" value="">木</label>
+                                                            <label><input type="checkbox" value="">金</label>
+                                                            <label><input type="checkbox" value="">土</label>
+                                                            <label><input type="checkbox" value="">日　</label>
 
-                              <label><input type="checkbox" value="">平日</label>
-                              <label><input type="checkbox" value="">土日・祝日</label>
-                            </div> <!-- <div class="checkbox"> -->
-                          <!-- -->
-                          <li>時間帯を指定</li>
-                            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
-                              --
-                              <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu" role="menu">  <!-- 「x時」選択用 -->
-                              <li role="presentation"><a href="#">0</a></li>
-                              <li role="presentation"><a href="#">1</a></li>
-                              <li role="presentation"><a href="#">2</a></li>
-                              <li role="presentation"><a href="#">3</a></li>
-                              <li role="presentation"><a href="#">4</a></li>
-                              <li role="presentation"><a href="#">5</a></li>
-                              <li role="presentation"><a href="#">6</a></li>
-                              <li role="presentation"><a href="#">7</a></li>
-                              <li role="presentation"><a href="#">8</a></li>
-                              <li role="presentation"><a href="#">9</a></li>
-                              <li role="presentation"><a href="#">10</a></li>
-                              <li role="presentation"><a href="#">11</a></li>
-                              <li role="presentation"><a href="#">12</a></li>
-                              <li role="presentation"><a href="#">13</a></li>
-                              <li role="presentation"><a href="#">14</a></li>
-                              <li role="presentation"><a href="#">15</a></li>
-                              <li role="presentation"><a href="#">16</a></li>
-                              <li role="presentation"><a href="#">17</a></li>
-                              <li role="presentation"><a href="#">18</a></li>
-                              <li role="presentation"><a href="#">19</a></li>
-                              <li role="presentation"><a href="#">20</a></li>
-                              <li role="presentation"><a href="#">21</a></li>
-                              <li role="presentation"><a href="#">22</a></li>
-                              <li role="presentation"><a href="#">23</a></li>
-                            </ul>
-                            :
-                            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
-                              --
-                              <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu" role="menu">  <!-- 「x分」選択用 -->
-                              <li role="presentation"><a href="#">00</a></li>
-                              <li role="presentation"><a href="#">05</a></li>
-                              <li role="presentation"><a href="#">10</a></li>
-                              <li role="presentation"><a href="#">15</a></li>
-                              <li role="presentation"><a href="#">20</a></li>
-                              <li role="presentation"><a href="#">25</a></li>
-                              <li role="presentation"><a href="#">30</a></li>
-                              <li role="presentation"><a href="#">35</a></li>
-                              <li role="presentation"><a href="#">40</a></li>
-                              <li role="presentation"><a href="#">45</a></li>
-                              <li role="presentation"><a href="#">50</a></li>
-                              <li role="presentation"><a href="#">55</a></li>
-                            </ul>
-                            から　
-                            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
-                              --
-                              <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu" role="menu"> <!-- 「x時」選択用 -->
-                              <li role="presentation"><a href="#">0</a></li>
-                              <li role="presentation"><a href="#">1</a></li>
-                              <li role="presentation"><a href="#">2</a></li>
-                              <li role="presentation"><a href="#">3</a></li>
-                              <li role="presentation"><a href="#">4</a></li>
-                              <li role="presentation"><a href="#">5</a></li>
-                              <li role="presentation"><a href="#">6</a></li>
-                              <li role="presentation"><a href="#">7</a></li>
-                              <li role="presentation"><a href="#">8</a></li>
-                              <li role="presentation"><a href="#">9</a></li>
-                              <li role="presentation"><a href="#">10</a></li>
-                              <li role="presentation"><a href="#">11</a></li>
-                              <li role="presentation"><a href="#">12</a></li>
-                              <li role="presentation"><a href="#">13</a></li>
-                              <li role="presentation"><a href="#">14</a></li>
-                              <li role="presentation"><a href="#">15</a></li>
-                              <li role="presentation"><a href="#">16</a></li>
-                              <li role="presentation"><a href="#">17</a></li>
-                              <li role="presentation"><a href="#">18</a></li>
-                              <li role="presentation"><a href="#">19</a></li>
-                              <li role="presentation"><a href="#">20</a></li>
-                              <li role="presentation"><a href="#">21</a></li>
-                              <li role="presentation"><a href="#">22</a></li>
-                              <li role="presentation"><a href="#">23</a></li>
-                            </ul>
-                            :
-                            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
-                              --
-                              <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu" role="menu"> <!-- 「x分」選択用 -->
-                              <li role="presentation"><a href="#">00</a></li>
-                              <li role="presentation"><a href="#">05</a></li>
-                              <li role="presentation"><a href="#">10</a></li>
-                              <li role="presentation"><a href="#">15</a></li>
-                              <li role="presentation"><a href="#">20</a></li>
-                              <li role="presentation"><a href="#">25</a></li>
-                              <li role="presentation"><a href="#">30</a></li>
-                              <li role="presentation"><a href="#">35</a></li>
-                              <li role="presentation"><a href="#">40</a></li>
-                              <li role="presentation"><a href="#">45</a></li>
-                              <li role="presentation"><a href="#">50</a></li>
-                              <li role="presentation"><a href="#">55</a></li>
-                            </ul>
-                            まで
-                          <li>挿入</li>
-                          <button type="button" class="btn btn-primary">挿入</button>
-                          <li>ソート</li>
-                          <button type="button" class="btn btn-primary">ソート</button>
-                          <!-- -->
-                        </ol>
-                        <br>
-                      </div> <!-- <div class="dropdown"> -->
-                    </div> <!-- <div class="li_content"> -->
-                    <!-- -->
-                    <li>自分の空き時間から検索</li>
-                    <div class="li_content">
-                      <div class="dropdown">
-                        <ol>
-                          <li>期間を指定</li>
-                            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
-                              --
-                              <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu" role="menu">  <!-- 月選択用 -->
-                              <li role="presentation"><a href="#">1</a></li>
-                              <li role="presentation"><a href="#">2</a></li>
-                              <li role="presentation"><a href="#">3</a></li>
-                              <li role="presentation"><a href="#">4</a></li>
-                              <li role="presentation"><a href="#">5</a></li>
-                              <li role="presentation"><a href="#">6</a></li>
-                              <li role="presentation"><a href="#">7</a></li>
-                              <li role="presentation"><a href="#">8</a></li>
-                              <li role="presentation"><a href="#">9</a></li>
-                              <li role="presentation"><a href="#">10</a></li>
-                              <li role="presentation"><a href="#">11</a></li>
-                              <li role="presentation"><a href="#">12</a></li>
-                            </ul>
-                            月
-                            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
-                              --
-                              <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu" role="menu">  <!-- ひにち選択用 -->
-                              <li role="presentation"><a href="#">1</a></li>
-                              <li role="presentation"><a href="#">2</a></li>
-                              <li role="presentation"><a href="#">3</a></li>
-                              <li role="presentation"><a href="#">4</a></li>
-                              <li role="presentation"><a href="#">5</a></li>
-                              <li role="presentation"><a href="#">6</a></li>
-                              <li role="presentation"><a href="#">7</a></li>
-                              <li role="presentation"><a href="#">8</a></li>
-                              <li role="presentation"><a href="#">9</a></li>
-                              <li role="presentation"><a href="#">10</a></li>
-                              <li role="presentation"><a href="#">11</a></li>
-                              <li role="presentation"><a href="#">12</a></li>
-                            </ul>
-                            日 から　
-                            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
-                              --
-                              <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu" role="menu"> <!-- 月選択用 -->
-                              <li role="presentation"><a href="#">1</a></li>
-                              <li role="presentation"><a href="#">2</a></li>
-                              <li role="presentation"><a href="#">3</a></li>
-                              <li role="presentation"><a href="#">4</a></li>
-                              <li role="presentation"><a href="#">5</a></li>
-                              <li role="presentation"><a href="#">6</a></li>
-                              <li role="presentation"><a href="#">7</a></li>
-                              <li role="presentation"><a href="#">8</a></li>
-                              <li role="presentation"><a href="#">9</a></li>
-                              <li role="presentation"><a href="#">10</a></li>
-                              <li role="presentation"><a href="#">11</a></li>
-                              <li role="presentation"><a href="#">12</a></li>
-                            </ul>
-                            月
-                            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
-                              --
-                              <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu" role="menu"> <!-- ひにち選択用 -->
-                              <li role="presentation"><a href="#">1</a></li>
-                              <li role="presentation"><a href="#">2</a></li>
-                              <li role="presentation"><a href="#">3</a></li>
-                              <li role="presentation"><a href="#">4</a></li>
-                              <li role="presentation"><a href="#">5</a></li>
-                              <li role="presentation"><a href="#">6</a></li>
-                              <li role="presentation"><a href="#">7</a></li>
-                              <li role="presentation"><a href="#">8</a></li>
-                              <li role="presentation"><a href="#">9</a></li>
-                              <li role="presentation"><a href="#">10</a></li>
-                              <li role="presentation"><a href="#">11</a></li>
-                              <li role="presentation"><a href="#">12</a></li>
-                            </ul>
-                            日 まで
-                          <!-- -->
-                          <li>曜日を指定</li>
-                            <div class="checkbox"> <!-- 曜日のチェックボックス -->
-                              <label><input type="checkbox" value="">月</label>
-                              <label><input type="checkbox" value="">火</label>
-                              <label><input type="checkbox" value="">水</label>
-                              <label><input type="checkbox" value="">木</label>
-                              <label><input type="checkbox" value="">金</label>
-                              <label><input type="checkbox" value="">土</label>
-                              <label><input type="checkbox" value="">日　</label>
+                                                            <label><input type="checkbox" value="">平日</label>
+                                                            <label><input type="checkbox" value="">土日・祝日</label>
+                                                        </div> <!-- <div class="checkbox"> -->
+                                                    <!-- -->
+                                                    <li>時間帯を指定</li>
+                                                        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                                                            --
+                                                            <span class="caret"></span>
+                                                        </button>
+                                                        <ul class="dropdown-menu" role="menu"> <!-- 「x時」選択用 -->
+                                                            <li role="presentation"><a href="#">0</a></li>
+                                                            <li role="presentation"><a href="#">1</a></li>
+                                                            <li role="presentation"><a href="#">2</a></li>
+                                                            <li role="presentation"><a href="#">3</a></li>
+                                                            <li role="presentation"><a href="#">4</a></li>
+                                                            <li role="presentation"><a href="#">5</a></li>
+                                                            <li role="presentation"><a href="#">6</a></li>
+                                                            <li role="presentation"><a href="#">7</a></li>
+                                                            <li role="presentation"><a href="#">8</a></li>
+                                                            <li role="presentation"><a href="#">9</a></li>
+                                                            <li role="presentation"><a href="#">10</a></li>
+                                                            <li role="presentation"><a href="#">11</a></li>
+                                                            <li role="presentation"><a href="#">12</a></li>
+                                                            <li role="presentation"><a href="#">13</a></li>
+                                                            <li role="presentation"><a href="#">14</a></li>
+                                                            <li role="presentation"><a href="#">15</a></li>
+                                                            <li role="presentation"><a href="#">16</a></li>
+                                                            <li role="presentation"><a href="#">17</a></li>
+                                                            <li role="presentation"><a href="#">18</a></li>
+                                                            <li role="presentation"><a href="#">19</a></li>
+                                                            <li role="presentation"><a href="#">20</a></li>
+                                                            <li role="presentation"><a href="#">21</a></li>
+                                                            <li role="presentation"><a href="#">22</a></li>
+                                                            <li role="presentation"><a href="#">23</a></li>
+                                                        </ul>
+                                                        :
+                                                        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                                                            --
+                                                            <span class="caret"></span>
+                                                        </button>
+                                                        <ul class="dropdown-menu" role="menu"> <!-- 「x分」選択用 -->
+                                                            <li role="presentation"><a href="#">00</a></li>
+                                                            <li role="presentation"><a href="#">05</a></li>
+                                                            <li role="presentation"><a href="#">10</a></li>
+                                                            <li role="presentation"><a href="#">15</a></li>
+                                                            <li role="presentation"><a href="#">20</a></li>
+                                                            <li role="presentation"><a href="#">25</a></li>
+                                                            <li role="presentation"><a href="#">30</a></li>
+                                                            <li role="presentation"><a href="#">35</a></li>
+                                                            <li role="presentation"><a href="#">40</a></li>
+                                                            <li role="presentation"><a href="#">45</a></li>
+                                                            <li role="presentation"><a href="#">50</a></li>
+                                                            <li role="presentation"><a href="#">55</a></li>
+                                                        </ul>
+                                                        から　
+                                                        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                                                            --
+                                                            <span class="caret"></span>
+                                                        </button>
+                                                        <ul class="dropdown-menu" role="menu"> <!-- 「x時」選択用 -->
+                                                            <li role="presentation"><a href="#">0</a></li>
+                                                            <li role="presentation"><a href="#">1</a></li>
+                                                            <li role="presentation"><a href="#">2</a></li>
+                                                            <li role="presentation"><a href="#">3</a></li>
+                                                            <li role="presentation"><a href="#">4</a></li>
+                                                            <li role="presentation"><a href="#">5</a></li>
+                                                            <li role="presentation"><a href="#">6</a></li>
+                                                            <li role="presentation"><a href="#">7</a></li>
+                                                            <li role="presentation"><a href="#">8</a></li>
+                                                            <li role="presentation"><a href="#">9</a></li>
+                                                            <li role="presentation"><a href="#">10</a></li>
+                                                            <li role="presentation"><a href="#">11</a></li>
+                                                            <li role="presentation"><a href="#">12</a></li>
+                                                            <li role="presentation"><a href="#">13</a></li>
+                                                            <li role="presentation"><a href="#">14</a></li>
+                                                            <li role="presentation"><a href="#">15</a></li>
+                                                            <li role="presentation"><a href="#">16</a></li>
+                                                            <li role="presentation"><a href="#">17</a></li>
+                                                            <li role="presentation"><a href="#">18</a></li>
+                                                            <li role="presentation"><a href="#">19</a></li>
+                                                            <li role="presentation"><a href="#">20</a></li>
+                                                            <li role="presentation"><a href="#">21</a></li>
+                                                            <li role="presentation"><a href="#">22</a></li>
+                                                            <li role="presentation"><a href="#">23</a></li>
+                                                        </ul>
+                                                        :
+                                                        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                                                            --
+                                                            <span class="caret"></span>
+                                                        </button>
+                                                        <ul class="dropdown-menu" role="menu"> <!-- 「x分」選択用 -->
+                                                            <li role="presentation"><a href="#">00</a></li>
+                                                            <li role="presentation"><a href="#">05</a></li>
+                                                            <li role="presentation"><a href="#">10</a></li>
+                                                            <li role="presentation"><a href="#">15</a></li>
+                                                            <li role="presentation"><a href="#">20</a></li>
+                                                            <li role="presentation"><a href="#">25</a></li>
+                                                            <li role="presentation"><a href="#">30</a></li>
+                                                            <li role="presentation"><a href="#">35</a></li>
+                                                            <li role="presentation"><a href="#">40</a></li>
+                                                            <li role="presentation"><a href="#">45</a></li>
+                                                            <li role="presentation"><a href="#">50</a></li>
+                                                            <li role="presentation"><a href="#">55</a></li>
+                                                        </ul>
+                                                        まで
+                                                    <li>挿入</li>
+                                                    <button type="button" class="btn btn-primary">挿入</button>
+                                                    <li>ソート</li>
+                                                    <button type="button" class="btn btn-primary">ソート</button>
+                                                    <!-- -->
+                                                </ol>
+                                                <br>
+                                            </div> <!-- <div class="dropdown"> -->
+                                        </div> <!-- <div class="li_content"> -->
+                                        <!-- -->
+                                        <li>自分の空き時間から検索</li>
+                                        <div class="li_content">
+                                            <div class="dropdown">
+                                                <ol>
+                                                    <li>期間を指定</li>
+                                                        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                                                            --
+                                                            <span class="caret"></span>
+                                                        </button>
+                                                        <ul class="dropdown-menu" role="menu"> <!-- 月選択用 -->
+                                                            <li role="presentation"><a href="#">1</a></li>
+                                                            <li role="presentation"><a href="#">2</a></li>
+                                                            <li role="presentation"><a href="#">3</a></li>
+                                                            <li role="presentation"><a href="#">4</a></li>
+                                                            <li role="presentation"><a href="#">5</a></li>
+                                                            <li role="presentation"><a href="#">6</a></li>
+                                                            <li role="presentation"><a href="#">7</a></li>
+                                                            <li role="presentation"><a href="#">8</a></li>
+                                                            <li role="presentation"><a href="#">9</a></li>
+                                                            <li role="presentation"><a href="#">10</a></li>
+                                                            <li role="presentation"><a href="#">11</a></li>
+                                                            <li role="presentation"><a href="#">12</a></li>
+                                                        </ul>
+                                                        月
+                                                        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                                                            --
+                                                            <span class="caret"></span>
+                                                        </button>
+                                                        <ul class="dropdown-menu" role="menu"> <!-- ひにち選択用 -->
+                                                            <li role="presentation"><a href="#">1</a></li>
+                                                            <li role="presentation"><a href="#">2</a></li>
+                                                            <li role="presentation"><a href="#">3</a></li>
+                                                            <li role="presentation"><a href="#">4</a></li>
+                                                            <li role="presentation"><a href="#">5</a></li>
+                                                            <li role="presentation"><a href="#">6</a></li>
+                                                            <li role="presentation"><a href="#">7</a></li>
+                                                            <li role="presentation"><a href="#">8</a></li>
+                                                            <li role="presentation"><a href="#">9</a></li>
+                                                            <li role="presentation"><a href="#">10</a></li>
+                                                            <li role="presentation"><a href="#">11</a></li>
+                                                            <li role="presentation"><a href="#">12</a></li>
+                                                        </ul>
+                                                        日 から　
+                                                        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                                                            --
+                                                            <span class="caret"></span>
+                                                        </button>
+                                                        <ul class="dropdown-menu" role="menu"> <!-- 月選択用 -->
+                                                            <li role="presentation"><a href="#">1</a></li>
+                                                            <li role="presentation"><a href="#">2</a></li>
+                                                            <li role="presentation"><a href="#">3</a></li>
+                                                            <li role="presentation"><a href="#">4</a></li>
+                                                            <li role="presentation"><a href="#">5</a></li>
+                                                            <li role="presentation"><a href="#">6</a></li>
+                                                            <li role="presentation"><a href="#">7</a></li>
+                                                            <li role="presentation"><a href="#">8</a></li>
+                                                            <li role="presentation"><a href="#">9</a></li>
+                                                            <li role="presentation"><a href="#">10</a></li>
+                                                            <li role="presentation"><a href="#">11</a></li>
+                                                            <li role="presentation"><a href="#">12</a></li>
+                                                        </ul>
+                                                        月
+                                                        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                                                            --
+                                                            <span class="caret"></span>
+                                                        </button>
+                                                        <ul class="dropdown-menu" role="menu"> <!-- ひにち選択用 -->
+                                                            <li role="presentation"><a href="#">1</a></li>
+                                                            <li role="presentation"><a href="#">2</a></li>
+                                                            <li role="presentation"><a href="#">3</a></li>
+                                                            <li role="presentation"><a href="#">4</a></li>
+                                                            <li role="presentation"><a href="#">5</a></li>
+                                                            <li role="presentation"><a href="#">6</a></li>
+                                                            <li role="presentation"><a href="#">7</a></li>
+                                                            <li role="presentation"><a href="#">8</a></li>
+                                                            <li role="presentation"><a href="#">9</a></li>
+                                                            <li role="presentation"><a href="#">10</a></li>
+                                                            <li role="presentation"><a href="#">11</a></li>
+                                                            <li role="presentation"><a href="#">12</a></li>
+                                                        </ul>
+                                                        日 まで
+                                                    <!-- -->
+                                                    <li>曜日を指定</li>
+                                                        <div class="checkbox"> <!-- 曜日のチェックボックス -->
+                                                            <label><input type="checkbox" value="">月</label>
+                                                            <label><input type="checkbox" value="">火</label>
+                                                            <label><input type="checkbox" value="">水</label>
+                                                            <label><input type="checkbox" value="">木</label>
+                                                            <label><input type="checkbox" value="">金</label>
+                                                            <label><input type="checkbox" value="">土</label>
+                                                            <label><input type="checkbox" value="">日　</label>
 
-                              <label><input type="checkbox" value="">平日</label>
-                              <label><input type="checkbox" value="">土日・祝日</label>
-                            </div> <!-- <div class="checkbox"> -->
-                          <!-- -->
-                          <li>時間帯を指定</li>
-                            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
-                              --
-                              <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu" role="menu">  <!-- 「x時」選択用 -->
-                              <li role="presentation"><a href="#">0</a></li>
-                              <li role="presentation"><a href="#">1</a></li>
-                              <li role="presentation"><a href="#">2</a></li>
-                              <li role="presentation"><a href="#">3</a></li>
-                              <li role="presentation"><a href="#">4</a></li>
-                              <li role="presentation"><a href="#">5</a></li>
-                              <li role="presentation"><a href="#">6</a></li>
-                              <li role="presentation"><a href="#">7</a></li>
-                              <li role="presentation"><a href="#">8</a></li>
-                              <li role="presentation"><a href="#">9</a></li>
-                              <li role="presentation"><a href="#">10</a></li>
-                              <li role="presentation"><a href="#">11</a></li>
-                              <li role="presentation"><a href="#">12</a></li>
-                              <li role="presentation"><a href="#">13</a></li>
-                              <li role="presentation"><a href="#">14</a></li>
-                              <li role="presentation"><a href="#">15</a></li>
-                              <li role="presentation"><a href="#">16</a></li>
-                              <li role="presentation"><a href="#">17</a></li>
-                              <li role="presentation"><a href="#">18</a></li>
-                              <li role="presentation"><a href="#">19</a></li>
-                              <li role="presentation"><a href="#">20</a></li>
-                              <li role="presentation"><a href="#">21</a></li>
-                              <li role="presentation"><a href="#">22</a></li>
-                              <li role="presentation"><a href="#">23</a></li>
-                            </ul>
-                            :
-                            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
-                              --
-                              <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu" role="menu">  <!-- 「x分」選択用 -->
-                              <li role="presentation"><a href="#">00</a></li>
-                              <li role="presentation"><a href="#">05</a></li>
-                              <li role="presentation"><a href="#">10</a></li>
-                              <li role="presentation"><a href="#">15</a></li>
-                              <li role="presentation"><a href="#">20</a></li>
-                              <li role="presentation"><a href="#">25</a></li>
-                              <li role="presentation"><a href="#">30</a></li>
-                              <li role="presentation"><a href="#">35</a></li>
-                              <li role="presentation"><a href="#">40</a></li>
-                              <li role="presentation"><a href="#">45</a></li>
-                              <li role="presentation"><a href="#">50</a></li>
-                              <li role="presentation"><a href="#">55</a></li>
-                            </ul>
-                            から　
-                            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
-                              --
-                              <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu" role="menu"> <!-- 「x時」選択用 -->
-                              <li role="presentation"><a href="#">0</a></li>
-                              <li role="presentation"><a href="#">1</a></li>
-                              <li role="presentation"><a href="#">2</a></li>
-                              <li role="presentation"><a href="#">3</a></li>
-                              <li role="presentation"><a href="#">4</a></li>
-                              <li role="presentation"><a href="#">5</a></li>
-                              <li role="presentation"><a href="#">6</a></li>
-                              <li role="presentation"><a href="#">7</a></li>
-                              <li role="presentation"><a href="#">8</a></li>
-                              <li role="presentation"><a href="#">9</a></li>
-                              <li role="presentation"><a href="#">10</a></li>
-                              <li role="presentation"><a href="#">11</a></li>
-                              <li role="presentation"><a href="#">12</a></li>
-                              <li role="presentation"><a href="#">13</a></li>
-                              <li role="presentation"><a href="#">14</a></li>
-                              <li role="presentation"><a href="#">15</a></li>
-                              <li role="presentation"><a href="#">16</a></li>
-                              <li role="presentation"><a href="#">17</a></li>
-                              <li role="presentation"><a href="#">18</a></li>
-                              <li role="presentation"><a href="#">19</a></li>
-                              <li role="presentation"><a href="#">20</a></li>
-                              <li role="presentation"><a href="#">21</a></li>
-                              <li role="presentation"><a href="#">22</a></li>
-                              <li role="presentation"><a href="#">23</a></li>
-                            </ul>
-                            :
-                            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
-                              --
-                              <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu" role="menu"> <!-- 「x分」選択用 -->
-                              <li role="presentation"><a href="#">00</a></li>
-                              <li role="presentation"><a href="#">05</a></li>
-                              <li role="presentation"><a href="#">10</a></li>
-                              <li role="presentation"><a href="#">15</a></li>
-                              <li role="presentation"><a href="#">20</a></li>
-                              <li role="presentation"><a href="#">25</a></li>
-                              <li role="presentation"><a href="#">30</a></li>
-                              <li role="presentation"><a href="#">35</a></li>
-                              <li role="presentation"><a href="#">40</a></li>
-                              <li role="presentation"><a href="#">45</a></li>
-                              <li role="presentation"><a href="#">50</a></li>
-                              <li role="presentation"><a href="#">55</a></li>
-                            </ul>
-                            までの
-                            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
-                              --
-                              <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu" role="menu"> <!-- 「x時間」選択用 -->
-                              <li role="presentation"><a href="#">0.5</a></li>
-                              <li role="presentation"><a href="#">1</a></li>
-                              <li role="presentation"><a href="#">1.5</a></li>
-                              <li role="presentation"><a href="#">2</a></li>
-                              <li role="presentation"><a href="#">2.5</a></li>
-                              <li role="presentation"><a href="#">3</a></li>
-                              <li role="presentation"><a href="#">3.5</a></li>
-                              <li role="presentation"><a href="#">4</a></li>
-                              <li role="presentation"><a href="#">4.5</a></li>
-                              <li role="presentation"><a href="#">5</a></li>
-                            </ul>
-                            時間
-                          <!-- -->
-                        </ol>
-                        <br>
-                        <button type="button" class="btn btn-primary">挿入</button>
-                      </div> <!-- <div class="dropdown"> -->
-                    </div> <!-- <div class="li_content"> -->
-                    <!-- -->
-                    <!-- ///////////////////////////////////////////////////////////////////////////////////////// -->
-                  </ul>
-                </div> <!-- <div id="matomete"> -->
-                
-                <!--
-                <li>ソート</li>
-                <button type="button" class="btn btn-primary">ソート</button>
-              -->
-              </div> <!-- <div class="option"> -->
+                                                            <label><input type="checkbox" value="">平日</label>
+                                                            <label><input type="checkbox" value="">土日・祝日</label>
+                                                        </div> <!-- <div class="checkbox"> -->
+                                                    <!-- -->
+                                                    <li>時間帯を指定</li>
+                                                        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                                                            --
+                                                            <span class="caret"></span>
+                                                        </button>
+                                                        <ul class="dropdown-menu" role="menu"> <!-- 「x時」選択用 -->
+                                                            <li role="presentation"><a href="#">0</a></li>
+                                                            <li role="presentation"><a href="#">1</a></li>
+                                                            <li role="presentation"><a href="#">2</a></li>
+                                                            <li role="presentation"><a href="#">3</a></li>
+                                                            <li role="presentation"><a href="#">4</a></li>
+                                                            <li role="presentation"><a href="#">5</a></li>
+                                                            <li role="presentation"><a href="#">6</a></li>
+                                                            <li role="presentation"><a href="#">7</a></li>
+                                                            <li role="presentation"><a href="#">8</a></li>
+                                                            <li role="presentation"><a href="#">9</a></li>
+                                                            <li role="presentation"><a href="#">10</a></li>
+                                                            <li role="presentation"><a href="#">11</a></li>
+                                                            <li role="presentation"><a href="#">12</a></li>
+                                                            <li role="presentation"><a href="#">13</a></li>
+                                                            <li role="presentation"><a href="#">14</a></li>
+                                                            <li role="presentation"><a href="#">15</a></li>
+                                                            <li role="presentation"><a href="#">16</a></li>
+                                                            <li role="presentation"><a href="#">17</a></li>
+                                                            <li role="presentation"><a href="#">18</a></li>
+                                                            <li role="presentation"><a href="#">19</a></li>
+                                                            <li role="presentation"><a href="#">20</a></li>
+                                                            <li role="presentation"><a href="#">21</a></li>
+                                                            <li role="presentation"><a href="#">22</a></li>
+                                                            <li role="presentation"><a href="#">23</a></li>
+                                                        </ul>
+                                                        :
+                                                        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                                                            --
+                                                            <span class="caret"></span>
+                                                        </button>
+                                                        <ul class="dropdown-menu" role="menu"> <!-- 「x分」選択用 -->
+                                                            <li role="presentation"><a href="#">00</a></li>
+                                                            <li role="presentation"><a href="#">05</a></li>
+                                                            <li role="presentation"><a href="#">10</a></li>
+                                                            <li role="presentation"><a href="#">15</a></li>
+                                                            <li role="presentation"><a href="#">20</a></li>
+                                                            <li role="presentation"><a href="#">25</a></li>
+                                                            <li role="presentation"><a href="#">30</a></li>
+                                                            <li role="presentation"><a href="#">35</a></li>
+                                                            <li role="presentation"><a href="#">40</a></li>
+                                                            <li role="presentation"><a href="#">45</a></li>
+                                                            <li role="presentation"><a href="#">50</a></li>
+                                                            <li role="presentation"><a href="#">55</a></li>
+                                                        </ul>
+                                                        から　
+                                                        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                                                            --
+                                                            <span class="caret"></span>
+                                                        </button>
+                                                        <ul class="dropdown-menu" role="menu"> <!-- 「x時」選択用 -->
+                                                            <li role="presentation"><a href="#">0</a></li>
+                                                            <li role="presentation"><a href="#">1</a></li>
+                                                            <li role="presentation"><a href="#">2</a></li>
+                                                            <li role="presentation"><a href="#">3</a></li>
+                                                            <li role="presentation"><a href="#">4</a></li>
+                                                            <li role="presentation"><a href="#">5</a></li>
+                                                            <li role="presentation"><a href="#">6</a></li>
+                                                            <li role="presentation"><a href="#">7</a></li>
+                                                            <li role="presentation"><a href="#">8</a></li>
+                                                            <li role="presentation"><a href="#">9</a></li>
+                                                            <li role="presentation"><a href="#">10</a></li>
+                                                            <li role="presentation"><a href="#">11</a></li>
+                                                            <li role="presentation"><a href="#">12</a></li>
+                                                            <li role="presentation"><a href="#">13</a></li>
+                                                            <li role="presentation"><a href="#">14</a></li>
+                                                            <li role="presentation"><a href="#">15</a></li>
+                                                            <li role="presentation"><a href="#">16</a></li>
+                                                            <li role="presentation"><a href="#">17</a></li>
+                                                            <li role="presentation"><a href="#">18</a></li>
+                                                            <li role="presentation"><a href="#">19</a></li>
+                                                            <li role="presentation"><a href="#">20</a></li>
+                                                            <li role="presentation"><a href="#">21</a></li>
+                                                            <li role="presentation"><a href="#">22</a></li>
+                                                            <li role="presentation"><a href="#">23</a></li>
+                                                        </ul>
+                                                        :
+                                                        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                                                            --
+                                                            <span class="caret"></span>
+                                                        </button>
+                                                        <ul class="dropdown-menu" role="menu"> <!-- 「x分」選択用 -->
+                                                            <li role="presentation"><a href="#">00</a></li>
+                                                            <li role="presentation"><a href="#">05</a></li>
+                                                            <li role="presentation"><a href="#">10</a></li>
+                                                            <li role="presentation"><a href="#">15</a></li>
+                                                            <li role="presentation"><a href="#">20</a></li>
+                                                            <li role="presentation"><a href="#">25</a></li>
+                                                            <li role="presentation"><a href="#">30</a></li>
+                                                            <li role="presentation"><a href="#">35</a></li>
+                                                            <li role="presentation"><a href="#">40</a></li>
+                                                            <li role="presentation"><a href="#">45</a></li>
+                                                            <li role="presentation"><a href="#">50</a></li>
+                                                            <li role="presentation"><a href="#">55</a></li>
+                                                        </ul>
+                                                        までの
+                                                        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                                                            --
+                                                            <span class="caret"></span>
+                                                        </button>
+                                                        <ul class="dropdown-menu" role="menu"> <!-- 「x時間」選択用 -->
+                                                            <li role="presentation"><a href="#">0.5</a></li>
+                                                            <li role="presentation"><a href="#">1</a></li>
+                                                            <li role="presentation"><a href="#">1.5</a></li>
+                                                            <li role="presentation"><a href="#">2</a></li>
+                                                            <li role="presentation"><a href="#">2.5</a></li>
+                                                            <li role="presentation"><a href="#">3</a></li>
+                                                            <li role="presentation"><a href="#">3.5</a></li>
+                                                            <li role="presentation"><a href="#">4</a></li>
+                                                            <li role="presentation"><a href="#">4.5</a></li>
+                                                            <li role="presentation"><a href="#">5</a></li>
+                                                        </ul>
+                                                        時間
+                                                    <!-- -->
+                                                </ol>
+                                                <br>
+                                                <button type="button" class="btn btn-primary">挿入</button>
+                                            </div> <!-- <div class="dropdown"> -->
+                                        </div> <!-- <div class="li_content"> -->
+                                        <!-- -->
+                                        <!-- ///////////////////////////////////////////////////////////////////////////////////////// -->
+                                    </ul>
+                                </div> <!-- <div id="matomete"> -->
 
+                                <!--
+                                <li>ソート</li>
+                                <button type="button" class="btn btn-primary">ソート</button>
+                            -->
+                            </div> <!-- <div class="option"> -->
+
+                        </div>
+
+                        <!-- コメント入力エリア -->
+                        <div class="form-group">
+                            <label>コメント</label>
+                            <textarea class="form-control input-sm" rows="3" placeholder="コメント"></textarea>
+                            <!--
+                            <input type="password" class="form-control" placeholder="Password">
+                            -->
+                        </div>
+
+                        <!-- ファイルアップロード -->
+                        <!--
+                        <div class="form-group">
+                            <label>File input</label>
+                            <input type="file">
+                        </div>
+                        -->
+
+                    　<!-- チェックボックス -->
+                        <!--
+                        <div class="checkbox">
+                                <input type="checkbox"> Check me out
+                        </div>
+                        -->
+
+                        <!-- 送信ボタン -->
+                        <div class="form-group">
+                            <button type="button" class="btn btn-default">決定</button>
+                        </div>
+                    </form>
+
+                    <!--
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-sm-2" style="background-color:red;">Red</div>
+                            <div class="col-sm-8" style="background-color:blue;">Blue</div>
+                            <div class="col-sm-2" style="background-color:yellow;">Yellow</div>
+                        </div>
+                    </div>
+                    -->
+                </div>
             </div>
-
-            <!-- コメント入力エリア -->
-            <div class="form-group">
-              <label>コメント</label>
-              <textarea class="form-control  input-sm" rows="3" placeholder="コメント"></textarea>
-              <!--
-              <input type="password" class="form-control" placeholder="Password">
-              -->
-            </div>
-
-            <!-- ファイルアップロード -->
-            <!--
-            <div class="form-group">
-              <label>File input</label>
-              <input type="file">
-            </div>
-            -->
-
-          　<!-- チェックボックス -->
-            <!--
-            <div class="checkbox">
-                <input type="checkbox"> Check me out
-            </div>
-            -->
-
-            <!-- 送信ボタン -->
-            <div class="form-group">
-              <button type="button" class="btn btn-default">決定</button>
-            </div>           
-          </form>
-
-          <!--
-          <div class="container-fluid">
-            <div class="row">
-              <div class="col-sm-2" style="background-color:red;">Red</div>
-              <div class="col-sm-8" style="background-color:blue;">Blue</div>
-              <div class="col-sm-2" style="background-color:yellow;">Yellow</div>
-            </div>
-          </div>
-          -->
+            <footer>&copy; Copyright 2018 ManegeSchedule All rights reserved.</footer>
         </div>
-      </div>
-      <footer>&copy; Copyright 2018 ManegeSchedule All rights reserved.</footer>
-    </div>
-  </body>
+    </body>
 </html>
