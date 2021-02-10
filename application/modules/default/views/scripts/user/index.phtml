@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Manage Schedule</title>
+    <meta charset='utf-8' />
+
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/ui-lightness/jquery-ui.css" >
+
+    <style type="text/css">
+        h3{
+            color: #fff;
+            padding:10px;
+            /*width: 300px;*/
+            background:#333;
+        }
+        h3 i{
+            text-align: right;
+            cursor:pointer;
+        }
+        h3 span{
+            /*display:block;*/
+            /*background:url(開く時の画像) no-repeat right 50%;*/
+        }
+        h3.bg02 span{
+            /*background:url(閉じる時の画像) no-repeat right 50%;*/
+        }
+        div{
+            padding:20px;
+            /*display:none;*/
+        }
+
+        input[type=checkbox] {
+            display: none;
+        }
+        .check_css {
+            -webkit-transition: background-color 0.2s linear;
+            transition: background-color 0.2s linear;
+            position: relative;
+            display: inline-block;
+            padding: 0 0 0 42px;
+            vertical-align: middle;
+            cursor: pointer;
+        }
+        .check_css:hover:after {
+            border-color: #0171bd;
+        }
+        .check_css:after {
+            -webkit-transition: border-color 0.2s linear;
+            transition: border-color 0.2s linear;
+            position: absolute;
+            top: 50%;
+            left: 15px;
+            display: block;
+            margin-top: -10px;
+            width: 16px;
+            height: 16px;
+            border: 2px solid #ccc;
+            border-radius: 6px;
+            content: '';
+        }
+        .check_css:before {
+            -webkit-transition: opacity 0.2s linear;
+            transition: opacity 0.2s linear;
+            position: absolute;
+            top: 50%;
+            left: 21px;
+            display: block;
+            margin-top: -7px;
+            width: 5px;
+            height: 9px;
+            border-right: 3px solid #0171bd;
+            border-bottom: 3px solid #0171bd;
+            content: '';
+            opacity: 0;
+            -webkit-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            transform: rotate(45deg);
+        }
+        input[type=checkbox]:checked + .check_css:before {
+            opacity: 1;
+        }
+    </style>
+
+</head>
+<body>
+
+<div>
+
+    <div>
+        <div>
+
+            <div class="row">
+                <div align="center" class="title-background" >
+                    <div class="col-lg-8 col-lg-offset-2 ">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <p class="title-text">ManageSchedule</p>
+                                <p>イベント作成画面</p>
+                                <!--<p class="subtitle-text">友達と立替料金が管理できるアプリです</p>-->
+                            </div>
+
+                            <div class="col-lg-12">
+                                <div class="row">
+                                    <div class="col-xs-4">
+                                        イベント名
+                                    </div>
+                                    <div class="col-xs-8" style="text-align: left;">
+                                        aaa
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-4">
+                                    </div>
+                                    <div class="col-xs-8" style="text-align: left;">
+                                        <input type="text" id="datepicker">
+
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-4" style="text-align: right;">
+
+                                    </div>
+                                    <div class="col-xs-8" style="text-align: left;">
+
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-4" style="text-align: right;">
+
+                                    </div>
+                                    <div class="col-xs-8" style="text-align: left;">
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div style="width: 300px;">
+                                <h3>
+                                    <span>カレンダー一覧</span>
+                                    <i class="accordion fa fa-angle-down"></i>
+                                </h3>
+                                <div id="content" style="text-align: left;">
+                                    <!--                                <p class="calendar-checkbox">-->
+                                    <!--                                    <input type="checkbox" name="任意" value="ホームページ" id="hp" checked="checked"/>-->
+                                    <!--                                    <label for="hp" class="check_css"></label>-->
+                                    <!--                                </p>-->
+                                </div>
+                            </div>
+
+                            <div style="width: 500px; text-align: left;">
+                                <pre>
+<!--                                --><?php //var_dump($this->startTime); ?>
+                                    <!--                                --><?php //var_dump($this->endTime); ?>
+                                    </pre>
+                                <?php $num = 0; foreach($this->date as $item): ?>
+                                    <p class="dateselect">
+                                        <?php echo $item[0]."〜".substr($item[1], 11, 5); ?>
+                                        <input id="date<?php echo $num; ?>-0" name="<?php echo $num; ?>" value="0" type="radio" checked="checkedS">○
+                                        <input id="date<?php echo $num; ?>-1" name="<?php echo $num; ?>" value="1" type="radio">△
+                                        <input id="date<?php echo $num; ?>-2" name="<?php echo $num; ?>" value="2" type="radio">×
+                                        <?php ++$num; ?>
+                                    </p>
+                                <?php endforeach; ?>
+                            </div>
+
+                            <div id="results"></div>
+
+                            <!--Add buttons to initiate auth sequence and sign out-->
+                            <button id="authorize-button" style="display: none;">Authorize</button>
+                            <button id="signout-button" style="display: none;">Sign Out</button>
+
+                            <!---->
+                            <!--                            <div class="col-lg-12">-->
+                            <!--                                人数を決めましょう<br>-->
+                            <!--                                <div class="select-wrap">-->
+                            <!--                                    <select id="mem-num" name="mem-num">-->
+                            <!--                                        --><?php //for ($i=1; $i<=100; $i++): ?>
+                            <!--                                            <option value="--><?php //echo $i; ?><!--">--><?php //echo $i; ?><!--</option>-->
+                            <!--                                        --><?php //endfor; ?>
+                            <!--                                    </select>-->
+                            <!--                                </div>-->
+                            <!--                                <br><br>-->
+                            <!--                                <form action="detail" method="post">-->
+                            <!--                                    <input type="hidden" id="num" name="num" value="1">-->
+                            <!--                                    名前を記入しましょう <br>-->
+                            <!--                                    <div id="mem-name-box">-->
+                            <!--                                        <div class="input-wrap">-->
+                            <!--                                            <input type="text" name="mem-name1" placeholder="１人目の名前を記入">-->
+                            <!--                                        </div>-->
+                            <!--                                    </div>-->
+                            <!--                                    <div id="mem-name" class="input-wrap" style="display: none;">-->
+                            <!--                                        <input type="text" name="sample" placeholder="１人目の名前を記入">-->
+                            <!--                                    </div>-->
+                            <!--                                    <div class="button-wrap"><button type="submit" value="次へ">次へ</button></div>-->
+                            <!--                                </form>-->
+                            <!--                            </div>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <?php echo $this->startTime["year"].", ".$this->startTime["month"].", ".$this->startTime["day"]; ?>
+    <?php echo $this->endTime["year"].", ".$this->endTime["month"].", ".$this->endTime["day"]; ?>
+
+</div>
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
+
+<script type="text/javascript">
+
+    $(function() {
+        $("#datepicker").datepicker();
+        $("#datepicker").datepicker("option", "showOn", 'button');
+        $("#datepicker").datepicker("option", "buttonImageOnly", true);
+        $("#datepicker").datepicker("option", "buttonImage", 'ico_calendar.png');
+    });
+
+    // Client ID and API key from the Developer Console
+    var CLIENT_ID = '672296088832-v7ghkmcg9umbvq618gll8qifdlf33noo.apps.googleusercontent.com';
+    var API_KEY = 'AIzaSyCzMMER7O3G_Jd9WZJ47jKrUQD2z20L2HE';
+
+    // Array of API discovery doc URLs for APIs used by the quickstart
+    var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"];
+
+    // Authorization scopes required by the API; multiple scopes can be
+    // included, separated by spaces.
+    var SCOPES = "https://www.googleapis.com/auth/calendar.readonly";
+
+    var authorizeButton = document.getElementById('authorize-button');
+    var signoutButton = document.getElementById('signout-button');
+
+    /**
+     *  On load, called to load the auth2 library and API client library.
+     */
+    function handleClientLoad() {
+        MakeMSecList();
+        gapi.load('client:auth2', initClient);
+    }
+
+    var dDate;
+    // PHPから得られた時刻表を全てミリセックに直す
+    function MakeMSecList()
+    {
+        var _dDate = JSON.parse('<?php echo $this->dDate; ?>');
+        dDate = new Array(_dDate.length);
+        for (var i=0; i<_dDate.length; i++) {
+            var _j = new Array(_dDate[i].length + 1);
+            for (var j=0; j<_dDate[i].length; j++) {
+                _j[j] = Date.parse(_dDate[i][j]);
+            }
+            _j[_dDate[i].length] = 0;
+            dDate[i] = _j;
+        }
+//        console.log(dDate);
+    }
+
+    /**
+     *  Initializes the API client library and sets up sign-in state
+     *  listeners.
+     */
+    function initClient() {
+        gapi.client.init({
+            apiKey: API_KEY,
+            clientId: CLIENT_ID,
+            discoveryDocs: DISCOVERY_DOCS,
+            scope: SCOPES
+        }).then(function () {
+            // Listen for sign-in state changes.
+            gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
+
+            // Handle the initial sign-in state.
+            updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+            authorizeButton.onclick = handleAuthClick;
+            signoutButton.onclick = handleSignoutClick;
+        });
+    }
+
+    /**
+     *  Called when the signed in status changes, to update the UI
+     *  appropriately. After a sign-in, the API is called.
+     */
+    function updateSigninStatus(isSignedIn) {
+        if (isSignedIn) {
+            authorizeButton.style.display = 'none';
+            signoutButton.style.display = 'block';
+            listUpcomingEvents();
+        } else {
+            authorizeButton.style.display = 'block';
+            signoutButton.style.display = 'none';
+        }
+    }
+
+    /**
+     *  Sign in the user upon button click.
+     */
+    function handleAuthClick(event) {
+        gapi.auth2.getAuthInstance().signIn();
+    }
+
+    /**
+     *  Sign out the user upon button click.
+     */
+    function handleSignoutClick(event) {
+        gapi.auth2.getAuthInstance().signOut();
+    }
+
+    /**
+     * Append a pre element to the body containing the given message
+     * as its text node. Used to display the results of the API call.
+     *
+     * @param {string} message Text to be placed in pre element.
+     */
+    function appendPre(message) {
+        $("#results").append(message + '<br>')
+    }
+
+    function appendCalendarList(title, cal_id) {
+        $("#content").append('<p class="calendar-checkbox"><input type="checkbox" name="任意" value="ホームページ" id="cal-' + cal_id + '" checked="checked"/> <label for="cal-' + cal_id + '" class="check_css">' + title + '</label></p>');
+
+    }
+
+    /**
+     * Print the summary and start datetime/date of the next ten events in
+     * the authorized user's calendar. If no events are found an
+     * appropriate message is printed.
+     */
+//    var allEvents = new Array();
+//
+//    function checkAllEvents()
+//    {
+//        for (var i = 0; i < dDate.length; i++) {
+//            var dStart = dDate[i][0];
+//            var dEnd = dDate[i][1];
+//            console.log(dStart + "  " + dEnd);
+//
+//            var bool = CheckAttendance(dStart, dEnd);
+//            console.log(bool);
+//            ChangeAttendance(bool, i);
+//
+//
+//        }
+//    }
+
+    function listUpcomingEvents() {
+
+        gapi.client.calendar.calendarList.list({
+            'maxResults': 100,
+            'showHidden': true
+        }).then(function(responce) {
+            var calendarIds = responce.result.items;
+            // monthは0を起点とする
+            console.log(new Date(<?php echo $this->startTime["year"].", ".($this->startTime["month"] -1) .", ".($this->startTime["day"]); ?>));
+            console.log(new Date(<?php echo $this->endTime["year"].", ".($this->endTime["month"] -1).", ".($this->endTime["day"]+1); ?>));
+            for (var j=0; j<calendarIds.length; j++) {
+                var cal = calendarIds[j];
+                appendCalendarList(calendarIds[j].summary, j);
+//                console.log((new Date()).toISOString());
+                gapi.client.calendar.events.list({
+                    'calendarId': calendarIds[j].id,
+                    'timeMin': (new Date(<?php echo $this->startTime["year"].", ".($this->startTime["month"] -1) .", ".($this->startTime["day"]); ?>)).toISOString(),
+                    'timeMax': (new Date(<?php echo $this->endTime["year"].", ".($this->endTime["month"] -1).", ".($this->endTime["day"]+1); ?>)).toISOString(),
+                    'showDeleted': false,
+                    'singleEvents': true,
+                    'maxResults': 100,
+                    'orderBy': 'startTime'
+                }).then(function (response) {
+                    var events = response.result.items;
+//                    allEvents.push(events);
+//                    CheckAttendance(events, )
+
+                    for (var i = 0; i < dDate.length; i++) {
+                        var dStart = dDate[i][0];
+                        var dEnd = dDate[i][1];
+                        var nowBool = dDate[i][2];
+//                        console.log(dStart + "  " + dEnd);
+
+//                        console.log("number:" + i);
+                        var bool = CheckAttendance(events, dStart, dEnd, nowBool);
+                        dDate[i][2] = bool;
+//                        console.log(bool);
+                        ChangeAttendance(bool, i);
+
+
+                    }
+
+//                    console.log(events.length);
+
+
+                });
+
+
+            }
+
+//            checkAllEvents();
+
+        });
+
+//        if (events.length > 0) {
+//            for (var i = 0; i < events.length; i++) {
+//                var event = events[i];
+//                var bool = CheckAttendance(Date.parse(event.start.dateTime), Date.parse(event.end.dateTime), Date.parse(event.start.date));
+//                ChangeAttendance(bool, i);
+//
+//                var start = event.start.dateTime;
+//                var end = event.end.dateTime;
+//                if (!start) {
+//                    start = event.start.date;
+//
+//                }
+//                else {
+//
+//                }
+//                appendPre(event.summary + ' (' + start + ' - ' + end + ')')
+//            }
+//        } else {
+//            appendPre('No upcoming events found.');
+//        }
+//        appendPre('<br>');
+
+    }
+
+    function CheckAttendance(events, dStart, dEnd, nowBool)
+    {
+//        日程開始時間 dStart, dEnd
+//        元々の用事 jStart, jEnd
+//
+//        if (jStart <= dStart && jEnd >= dEnd) false;
+//        if (jEnd <= dStart) false;
+//        if (jStart >= dEnd) false;
+//
+//        if (jStart > dStart) {
+//            if ((dEnd - jStart) / (dEnd - dStart) > 0.5) false;
+//            else nan;
+//        }
+//        if (jEnd < dEnd) {
+//            if ((jEnd - dStart) / (dEnd - dStart) > 0.5) false;
+//            else nan;
+//        }
+//
+//        return true;
+        var flg2 = false;
+//        console.log(events.length);
+
+        if (nowBool == 2) return 2;
+
+        for (var i=0; i<events.length; i++) {
+            var jStart = Date.parse(events[i].start.dateTime);
+            var jEnd = Date.parse(events[i].end.dateTime);
+//            console.log(events[i].start.dateTime);
+            if (!events[i].start.dateTime) {
+                console.log(events[i].summary);
+                var start = events[i].start.date;
+                jStart = Date.parse(new Date(start.slice(0,4), parseInt(start.slice(5,7))-1, start.slice(8,10)));
+                jEnd = jStart + 24 * 60 * 60 * 1000;
+
+//                console.log(jStart + " " + jEnd + " : " + new Date(jStart) + " " + new Date(jEnd));
+//                console.log(start + "      " + new Date(jEnd) + "       " + jStart + " " + jEnd);
+//                console.log(dStart + " " + dEnd + " : " + new Date(dStart) + " " + new Date(dEnd)) ;
+//                console.log("-------");
+
+            }
+
+
+            if (jStart <= dStart && jEnd >= dEnd) {return 2;}
+            if (jEnd <= dStart) continue;
+            if (jStart >= dEnd) continue;
+
+            if (jStart > dStart && jStart < dEnd) {
+                if ((dEnd - jStart) / (dEnd - dStart) > 0.5) {return 2;}
+                else {flg2 = true;}
+            }
+            if (jEnd < dEnd && jEnd > dStart) {
+//                console.log(i + " " + (jEnd - dStart) / (dEnd - dStart) + " ");
+                if ((jEnd - dStart) / (dEnd - dStart) > 0.5) {return 2;}
+                else {flg2 = true;}
+            }
+
+        }
+
+        if (flg2 || nowBool == 1) return 1;
+        else return 0;
+    }
+
+    function ChangeAttendance(bool, i)
+    {
+        if (bool == 0) return;
+        $("#date" + i + "-" + bool).prop("checked", true);
+    }
+
+
+    /** Appearance */
+    $(function(){
+
+
+        $(".accordion").click(function(){
+            $(this).parent().toggleClass("bg02").next().slideToggle();
+        });
+    });
+
+</script>
+
+<script async defer src="https://apis.google.com/js/api.js"
+        onload="this.onload=function(){};handleClientLoad()"
+        onreadystatechange="if (this.readyState === 'complete') this.onload()">
+</script>
+</body>
+</html>
